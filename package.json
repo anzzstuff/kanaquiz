@@ -4,7 +4,9 @@
   "description": "Application for studying hiragana & katakana characters.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --host 0.0.0.0",
+    "build": "webpack -p --config webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,27 @@
   "bugs": {
     "url": "https://github.com/anzzstuff/kanaquiz/issues"
   },
-  "homepage": "https://github.com/anzzstuff/kanaquiz#readme"
+  "homepage": "https://github.com/anzzstuff/kanaquiz#readme",
+  "devDependencies": {
+    "autoprefixer": "^6.3.7",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "css-loader": "^0.23.1",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.22.0",
+    "postcss": "^5.0.21",
+    "postcss-loader": "^0.9.1",
+    "precss": "^1.4.0",
+    "react-hot-loader": "^1.3.0",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "postcss": "^5.1.0",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1"
+  }
 }
