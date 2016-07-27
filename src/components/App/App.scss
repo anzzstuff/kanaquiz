@@ -1,0 +1,18 @@
+html {
+    height: 100%;   /* height sets are for android chrome background fix */
+    min-height: 100%;
+}
+body {
+    min-height: 100%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #eee;
+    color: #111;
+}
+.container {
+    margin: 0 auto;
+    padding: 20px 0 20px;
+    max-width: 1024px;
+}
+.row {
+    margin: 0;
+}
