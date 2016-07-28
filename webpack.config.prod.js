@@ -1,8 +1,25 @@
-var path = require('path');
-var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
-var precss = require('precss');
-var HtmlWebPackPlugin = require('html-webpack-plugin');
+const NODE_ENV = 'production';
+const dotenv = require('dotenv');
+
+const webpack = require('webpack');
+const fs = require('fs');
+const path = require('path');
+const autoprefixer = require('autoprefixer');
+const precss = require('precss');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+
+const dotEnvVars = dotenv.config();
+const envVariables =
+    Object.assign({}, dotEnvVars);
+const defines =
+  Object.keys(envVariables)
+  .reduce((memo, key) => {
+    const val = JSON.stringify(envVariables[key]);
+    memo[`__${key.toUpperCase()}__`] = val;
+    return memo;
+  }, {
+    __NODE_ENV__: JSON.stringify(NODE_ENV)
+  });
 
 module.exports = {
     devtool: 'cheap-module-source-map',
@@ -35,7 +52,8 @@ module.exports = {
                 warnings: false
             },
         }),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoErrorsPlugin(),
+        new webpack.DefinePlugin(defines)        
     ],
     module: {
         loaders: [
