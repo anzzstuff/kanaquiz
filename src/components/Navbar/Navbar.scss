@@ -1,15 +1,30 @@
-#nav-profile {
-    text-transform:capitalize;
-}
 #navbar ul li {
     font-size: 1.2em;
+    @media (max-width: 768px) {
+      font-size: 1.0em;
+    }
     .glyphicon {
         font-size: 0.9em;
-        color: #62bbff;
+        color: #d9534f;
     }
 }
 .navbar-inverse {
-    background-color: #333;
+    background-color: #444;
+}
+.nav a {
+  color: #fff !important;
+}
+.nav a:hover {
+  color: #bbb !important;
+}
+#nav-kanaquiz a, #nav-kanaquiz {
+  color: #fff !important;
+  span {
+    color: #fff !important;
+  }
+}
+#nav-kanaquiz a:hover {
+  cursor: default;
 }
 // From http://getbootstrap.com/examples/non-responsive/non-responsive.css
 .container .navbar-header,

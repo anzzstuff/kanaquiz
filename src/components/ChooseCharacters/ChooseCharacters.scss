@@ -1,0 +1,38 @@
+.welcome {
+    p:last-child {
+        margin-bottom: 0;
+    }
+    h4 {
+        margin-top: 0;
+    }
+}
+.choose-characters 
+{
+    .panel-heading {
+        font-weight: bold;
+    }
+    .choose-row {
+        font-size: 1.1em;
+        border-bottom: 1px #eee solid;
+        padding: 5px;
+    }
+    .choose-row:hover {
+        background-color: #f4f4f4;
+        cursor: pointer;
+    }
+    .choose-row:last-child {
+        border-bottom: 0px;
+    }
+    .glyphicon {
+        font-size: 0.9em;
+    }
+    .glyphicon-check {
+        color: green;
+    }
+    .glyphicon-unchecked {
+        color: #ccc;
+    }
+    .selection-areas {
+        padding: 7px;
+    }
+}

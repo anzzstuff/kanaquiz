@@ -3,15 +3,24 @@ import './Navbar.scss';
 
 class Navbar extends Component {
     render() {
+        let leftLink;
+        switch(this.props.gameState) {
+            case 'chooseCharacters':
+            default:
+                leftLink = <li id="nav-kanaquiz"><a href="javascript:;">Kana Quiz <span>2</span></a></li>
+                break;
+            case 'game':
+                leftLink = <li id="nav-choosecharacters"><a href="#" onClick={this.props.handleEndGame}><span className="glyphicon glyphicon-small glyphicon-arrow-left"></span> Back to menu</a></li>
+        }
         let profileButton = this.props.isAuthenticated ?
-            <a href="#" onClick={this.props.handleLogout}><span className="glyphicon glyphicon-small glyphicon-user"></span> {this.props.nickName}</a> :
-            <a href="#" onClick={this.props.handleLogin}><span className="glyphicon glyphicon-small glyphicon-user"></span> Log in</a>;
+            <a href="#" onClick={this.props.handleLogout}><span className="glyphicon glyphicon-small glyphicon-log-out"></span> Log out</a> :
+            <a href="#" onClick={this.props.handleLogin}><span className="glyphicon glyphicon-small glyphicon-log-in"></span> Log in</a>;
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div className="container">
                     <div id="navbar">
                         <ul className="nav navbar-nav">
-                            <li id="nav-kanaquiz"><a href="javascript:;">Kana Quiz 2</a></li>
+                            {leftLink}
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
                             <li id="nav-settings"><a href="#"><span className="glyphicon glyphicon-small glyphicon-cog"></span> Settings</a></li>
