@@ -48,7 +48,7 @@ class App extends Component {
 
     render() {
         let loginButton = !this.state.isAuthenticated ?
-            <button className="btn btn-info login-button" onClick={auth.login.bind(this)}>Log in to save your progress!</button> : '';
+            <p className="login-button"><a href="#" onClick={auth.login.bind(this)}>Log in to save your progress!</a></p> : '';
 
         return (
             <div>
@@ -58,14 +58,16 @@ class App extends Component {
                         gameState={this.state.gameState}
                         handleEndGame={this.endGame} 
                 />
-                <div className="container game">
-                    <GameContainer
-                            isAuthenticated={this.state.isAuthenticated}
-                            nickName={this.getNickName()}
-                            gameState={this.state.gameState}
-                            handleStartGame={this.startGame} 
-                    />
-                    <div className="row text-center">{loginButton}</div>
+                <div className="outercontainer">
+                    <div className="container game">
+                        <GameContainer
+                                isAuthenticated={this.state.isAuthenticated}
+                                nickName={this.getNickName()}
+                                gameState={this.state.gameState}
+                                handleStartGame={this.startGame} 
+                        />
+                        <div className="row text-center">{loginButton}</div>
+                    </div>
                 </div>
             </div>
         )

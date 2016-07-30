@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { kanaDictionary } from '../../data/kanaDictionary';
 import ChooseCharacters from '../ChooseCharacters/ChooseCharacters';
 
 class GameContainer extends Component {
@@ -8,6 +9,7 @@ class GameContainer extends Component {
     }
 
     startGame(options) {
+        // console.log(options); // prints array
         this.props.handleStartGame();
     }
 

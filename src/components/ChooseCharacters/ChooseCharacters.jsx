@@ -1,62 +1,20 @@
 import React, { Component } from 'react';
-
+import { kanaDictionary } from '../../data/kanaDictionary';
 import './ChooseCharacters.scss';
 import CharacterGroup from './CharacterGroup';
-/*
-let kanaArray = [
-        'あ','い','う','え','お',
-        'か','き','く','け','こ',
-        'さ','し','す','せ','そ',
-        'た','ち','つ','て','と',
-        'な','に','ぬ','ね','の',
-        'は','ひ','ふ','へ','ほ',
-        'ま','み','む','め','も',
-        'や','ゆ','よ',
-        'ら','り','る','れ','ろ',
-        'わ','を','ん'
-];
-let romajiArray = [
-        'a','i','u','e','o',
-        'ka','ki','ku','ke','ko',
-        'sa','shi','su','se','so',
-        'ta','chi','tsu','te','to',
-        'na','ni','nu','ne','no',
-        'ha','hi','fu','he','ho',
-        'ma','mi','mu','me','mo',
-        'ya','yu','yo',
-        'ra','ri','ru','re','ro',
-        'wa','wo','n'
-];
-*/
-let kanaDictionary = 
-{
-    'hiragana' : {
-        'h_group1': { characters: { 'a': 'あ', 'i': 'い', 'u': 'う', 'e': 'え', 'o': 'お' } },
-        'h_group2': { characters: { 'ka': 'か', 'ki': 'き', 'ku': 'く', 'ke': 'け', 'ko': 'こ' } },
-        'h_group3': { characters: { 'sa': 'さ', 'shi': 'し', 'su': 'す', 'se': 'せ', 'so': 'そ' } },
-        'h_group4': { characters: { 'ta': 'た', 'chi': 'ち', 'tsu': 'つ', 'te': 'て' , 'to': 'と' } },
-        'h_group5': { characters: { 'na': 'な', 'ni': 'に', 'nu': 'ぬ', 'ne': 'ね', 'no': 'の' } },
-        'h_group6': { characters: { 'ha': 'は', 'hi': 'ひ', 'fu': 'ふ', 'he': 'へ', 'ho': 'ほ' } },
-        'h_group7': { characters: { 'ma': 'ま', 'mi': 'み', 'mu': 'む', 'me': 'め', 'mo': 'も' } },
-        'h_group8': { characters: { 'ya': 'や', 'yu': 'ゆ', 'yo': 'よ' } },
-        'h_group9': { characters: { 'ra': 'ら', 'ri': 'り', 'ru': 'る', 're': 'れ', 'ro': 'ろ' } },
-        'h_group10': { characters: { 'wa': 'わ', 'wo': 'を', 'n': 'ん' } }
-    },
-    'katakana': {}
-};
-
-let acceptedAlternatives = { 'shi': 'si', 'chi': 'ti', 'tsu': 'tu', 'fu': 'hu' };
 
 class ChooseCharacters extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedKana: ['h_group1'],
-            kana : kanaDictionary
-        };
+            errMsg : '',
+            selectedKana: ['h_group1']
+        }
         this.startGame = this.startGame.bind(this);
         this.showKanaRows = this.showKanaRows.bind(this);
         this.toggleSelect = this.toggleSelect.bind(this);
+        this.selectAll = this.selectAll.bind(this);
+        this.selectNone = this.selectNone.bind(this);
     }
 
     getIndex(groupName) {
@@ -67,25 +25,48 @@ class ChooseCharacters extends Component {
         return this.getIndex(groupName) > -1 ? true : false;
     }
 
-    removeSelect(index) {
+    removeSelect(groupName) {
+        if(this.getIndex(groupName)<0) return;
         let newSelectedKana = this.state.selectedKana.slice();
-        newSelectedKana.splice(index, 1);
+        newSelectedKana.splice(this.getIndex(groupName), 1);
         this.setState({selectedKana: newSelectedKana});
     }
 
     addSelect(groupName) {
-        this.setState({selectedKana: this.state.selectedKana.concat(groupName)});
+        this.setState({errMsg: '', selectedKana: this.state.selectedKana.concat(groupName)});
     }
 
     toggleSelect(groupName) {
-        console.log('toggling '+groupName);
-        let index = this.getIndex(groupName);
-        if(index > -1) this.removeSelect(index);
+        if(this.getIndex(groupName) > -1) this.removeSelect(groupName);
         else this.addSelect(groupName);
     }
 
+    selectAll(whichKana) {
+        let thisKana = kanaDictionary[whichKana];
+        let newSelectedKana = this.state.selectedKana.slice();
+        Object.keys(thisKana).map(function(groupName) {
+            if(!this.isSelected(groupName))
+                newSelectedKana.push(groupName);
+        }, this);
+        this.setState({errMsg: '', selectedKana: newSelectedKana});
+    }
+
+    selectNone(whichKana) {
+        let newSelectedKana = [];
+        this.state.selectedKana.map(function(groupName) {
+            let mustBeRemoved = false;
+            Object.keys(kanaDictionary[whichKana]).map(function(removableGroupName) {
+                if(removableGroupName===groupName)
+                    mustBeRemoved = true;
+            }, this);
+            if(!mustBeRemoved)
+                newSelectedKana.push(groupName);
+        }, this);
+        this.setState({selectedKana: newSelectedKana});
+    }
+
     showKanaRows(whichKana) {
-        let thisKana = this.state.kana[whichKana];
+        let thisKana = kanaDictionary[whichKana];
         return Object.keys(thisKana).map(function(groupName, idx) {
             return (
                 <CharacterGroup
@@ -100,7 +81,11 @@ class ChooseCharacters extends Component {
     }
 
     startGame() {
-        this.props.handleStartGame('foo');
+        if(this.state.selectedKana.length < 1) {
+            this.setState({ errMsg: 'Choose at least one group!'});
+            return;
+        }
+        this.props.handleStartGame(this.state.selectedKana);
     }
 
     render() {
@@ -119,22 +104,30 @@ class ChooseCharacters extends Component {
                 <div className="row">
                     <div className="col-sm-6">
                         <div className="panel panel-default">
-                            <div className="panel-heading">Hiragana (ひらがな)</div>
+                            <div className="panel-heading">Hiragana <span className="pull-right">ひらがな</span></div>
                             <div className="panel-body selection-areas">
                                 {this.showKanaRows('hiragana')}
                             </div>
-                            <div className="panel-footer text-center"><a href="javascript:;">All</a> &middot; <a href="javascript:;">None</a></div>
+                            <div className="panel-footer text-center">
+                                <a href="javascript:;" onClick={()=>this.selectAll('hiragana')}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNone('hiragana')}>None</a>
+                            </div>
                         </div>
                     </div>
                     <div className="col-sm-6">
                         <div className="panel panel-default">
-                            <div className="panel-heading">Katakana (カタカナ)</div>
+                            <div className="panel-heading">Katakana <span className="pull-right">カタカナ</span></div>
                             <div className="panel-body selection-areas">
                                 {this.showKanaRows('katakana')}
                             </div>
+                            <div className="panel-footer text-center">
+                                <a href="javascript:;" onClick={()=>this.selectAll('katakana')}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNone('katakana')}>None</a>
+                            </div>
                         </div>
                     </div>
-                    <div className="col-xs-12 text-center"><button className="btn btn-danger startgame-button" onClick={this.startGame}>Start the Quiz!</button></div>
+                    <div className="col-xs-12 text-center">
+                        {this.state.errMsg!=''?(<div className="error-message">{this.state.errMsg}</div>):''}
+                        <button className="btn btn-danger startgame-button" onClick={this.startGame}>Start the Quiz!</button>
+                    </div>
                 </div>
             </div>
         );
