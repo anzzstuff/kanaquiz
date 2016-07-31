@@ -7,7 +7,7 @@ class Navbar extends Component {
         switch(this.props.gameState) {
             case 'chooseCharacters':
             default:
-                leftLink = <li id="nav-kanaquiz"><a href="javascript:;">Kana Quiz <span>2</span></a></li>
+                leftLink = <li id="nav-kanaquiz"><p className="nav navbar-text">Kana Quiz <span>2</span></p></li>
                 break;
             case 'game':
                 leftLink = <li id="nav-choosecharacters"><a href="#" onClick={this.props.handleEndGame}><span className="glyphicon glyphicon-small glyphicon-arrow-left"></span> Back to menu</a></li>

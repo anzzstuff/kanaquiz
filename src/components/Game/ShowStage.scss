@@ -1,0 +1,24 @@
+.show-stage {
+    margin-top: 200px;
+    h3 {
+        margin-top: 30px;
+    }
+}
+
+.stage-enter {
+  opacity: 0.01;
+}
+
+.stage-enter.stage-enter-active {
+  opacity: 1;
+  transition: opacity 1s ease-in;
+}
+
+.stage-leave {
+  opacity: 1;
+}
+
+.stage-leave.stage-leave-active {
+  opacity: 0.01;
+  transition: opacity 1s ease-in;
+}

@@ -8,17 +8,17 @@ class ChooseCharacters extends Component {
         super(props);
         this.state = {
             errMsg : '',
-            selectedKana: ['h_group1']
+            selectedGroups: this.props.selectedGroups
         }
         this.startGame = this.startGame.bind(this);
-        this.showKanaRows = this.showKanaRows.bind(this);
+        this.showGroupRows = this.showGroupRows.bind(this);
         this.toggleSelect = this.toggleSelect.bind(this);
         this.selectAll = this.selectAll.bind(this);
         this.selectNone = this.selectNone.bind(this);
     }
 
     getIndex(groupName) {
-        return this.state.selectedKana.indexOf(groupName);
+        return this.state.selectedGroups.indexOf(groupName);
     }
 
     isSelected(groupName) {
@@ -27,13 +27,13 @@ class ChooseCharacters extends Component {
 
     removeSelect(groupName) {
         if(this.getIndex(groupName)<0) return;
-        let newSelectedKana = this.state.selectedKana.slice();
-        newSelectedKana.splice(this.getIndex(groupName), 1);
-        this.setState({selectedKana: newSelectedKana});
+        let newSelectedGroups = this.state.selectedGroups.slice();
+        newSelectedGroups.splice(this.getIndex(groupName), 1);
+        this.setState({selectedGroups: newSelectedGroups});
     }
 
     addSelect(groupName) {
-        this.setState({errMsg: '', selectedKana: this.state.selectedKana.concat(groupName)});
+        this.setState({errMsg: '', selectedGroups: this.state.selectedGroups.concat(groupName)});
     }
 
     toggleSelect(groupName) {
@@ -43,29 +43,29 @@ class ChooseCharacters extends Component {
 
     selectAll(whichKana) {
         let thisKana = kanaDictionary[whichKana];
-        let newSelectedKana = this.state.selectedKana.slice();
+        let newSelectedGroups = this.state.selectedGroups.slice();
         Object.keys(thisKana).map(function(groupName) {
             if(!this.isSelected(groupName))
-                newSelectedKana.push(groupName);
+                newSelectedGroups.push(groupName);
         }, this);
-        this.setState({errMsg: '', selectedKana: newSelectedKana});
+        this.setState({errMsg: '', selectedGroups: newSelectedGroups});
     }
 
     selectNone(whichKana) {
-        let newSelectedKana = [];
-        this.state.selectedKana.map(function(groupName) {
+        let newSelectedGroups = [];
+        this.state.selectedGroups.map(function(groupName) {
             let mustBeRemoved = false;
             Object.keys(kanaDictionary[whichKana]).map(function(removableGroupName) {
                 if(removableGroupName===groupName)
                     mustBeRemoved = true;
             }, this);
             if(!mustBeRemoved)
-                newSelectedKana.push(groupName);
+                newSelectedGroups.push(groupName);
         }, this);
-        this.setState({selectedKana: newSelectedKana});
+        this.setState({selectedGroups: newSelectedGroups});
     }
 
-    showKanaRows(whichKana) {
+    showGroupRows(whichKana) {
         let thisKana = kanaDictionary[whichKana];
         return Object.keys(thisKana).map(function(groupName, idx) {
             return (
@@ -81,11 +81,11 @@ class ChooseCharacters extends Component {
     }
 
     startGame() {
-        if(this.state.selectedKana.length < 1) {
+        if(this.state.selectedGroups.length < 1) {
             this.setState({ errMsg: 'Choose at least one group!'});
             return;
         }
-        this.props.handleStartGame(this.state.selectedKana);
+        this.props.handleStartGame(this.state.selectedGroups);
     }
 
     render() {
@@ -104,9 +104,9 @@ class ChooseCharacters extends Component {
                 <div className="row">
                     <div className="col-sm-6">
                         <div className="panel panel-default">
-                            <div className="panel-heading">Hiragana <span className="pull-right">ひらがな</span></div>
+                            <div className="panel-heading">Hiragana · ひらがな<span className="pull-right">Progress</span></div>
                             <div className="panel-body selection-areas">
-                                {this.showKanaRows('hiragana')}
+                                {this.showGroupRows('hiragana')}
                             </div>
                             <div className="panel-footer text-center">
                                 <a href="javascript:;" onClick={()=>this.selectAll('hiragana')}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNone('hiragana')}>None</a>
@@ -115,9 +115,9 @@ class ChooseCharacters extends Component {
                     </div>
                     <div className="col-sm-6">
                         <div className="panel panel-default">
-                            <div className="panel-heading">Katakana <span className="pull-right">カタカナ</span></div>
+                            <div className="panel-heading">Katakana · カタカナ<span className="pull-right">Progress</span></div>
                             <div className="panel-body selection-areas">
-                                {this.showKanaRows('katakana')}
+                                {this.showGroupRows('katakana')}
                             </div>
                             <div className="panel-footer text-center">
                                 <a href="javascript:;" onClick={()=>this.selectAll('katakana')}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNone('katakana')}>None</a>

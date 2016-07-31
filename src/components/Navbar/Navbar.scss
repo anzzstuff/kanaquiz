@@ -17,11 +17,10 @@
 .nav a:hover {
   color: #bbb !important;
 }
-#nav-kanaquiz a, #nav-kanaquiz {
+.navbar-text {
   color: #fff !important;
-  span {
-    color: #fff !important;
-  }
+  cursor: default;
+  margin-bottom: 0;
 }
 #nav-kanaquiz a:hover {
   cursor: default;
