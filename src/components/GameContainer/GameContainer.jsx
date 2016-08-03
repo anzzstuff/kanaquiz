@@ -8,7 +8,7 @@ class GameContainer extends Component {
         super(props);
         this.startGame = this.startGame.bind(this);
         this.state = {
-            decidedGroups: ['h_group1', 'h_group3']
+            decidedGroups: ['h_group3']
         }
     }
 

@@ -1,4 +1,27 @@
 .question {
+    .previous-result{
+        max-width: 340px;
+        padding: 8px;
+        margin: 50px auto 30px;
+    }
+    .none {
+        background-color: #888;
+        color: #f5f5f5;
+    }
+    .correct {
+        color: #f5f5f5;
+        background-color: #080;
+    }
+    .wrong {
+        color: #f5f5f5;
+        background-color: #800;
+    }
+    .previous-result-none {
+        max-width: 340px;
+        padding: 6px;
+        margin: 30px auto;
+        color: #f5f5f5;
+    }
     .big-character {
         font-size: 5em;
     }
@@ -17,5 +40,4 @@
         background-color: #fff;
         border-color: #ccc;
     }
-    margin-top: 70px;
 }

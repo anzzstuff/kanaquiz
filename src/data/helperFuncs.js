@@ -1,3 +1,5 @@
+import { kanaDictionary } from './kanaDictionary';
+
 export function arrayContains(needle, haystack) {
     return (haystack.indexOf(needle) > -1) ? true : false;
 }
@@ -12,6 +14,24 @@ export function removeFromArray(needle, haystack) {
     return haystack;
 }
 
+export function findRomajisAtKanaKey(needle) {
+    let romaji = [];
+    Object.keys(kanaDictionary).map(function(whichKana) {
+    // console.log(whichKana); // 'hiragana' or 'katakana'
+        Object.keys(kanaDictionary[whichKana]).map(function(groupName) {
+            // console.log(groupName); // 'h_group1', ...
+            // return kanaDictionary[whichKana][groupName]['characters'][this.props.answer];
+            Object.keys(kanaDictionary[whichKana][groupName]['characters']).map(function(key) {
+                if(key==needle) {
+                    // console.log(kanaDictionary[whichKana][groupName]['characters'][key]);
+                    romaji = kanaDictionary[whichKana][groupName]['characters'][key];
+                }
+            }, this);
+        }, this);
+    }, this);
+    // console.log(romaji);
+    return romaji;
+}
 // export function getRandomFromArray(arr) {
 //     return arr[Math.floor(Math.random() * arr.length)];
 // }
