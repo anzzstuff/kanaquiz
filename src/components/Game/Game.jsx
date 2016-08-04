@@ -8,7 +8,7 @@ class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            stage:0,
+            stage:1,
             showScreen: ''
         }
         this.showQuestion = this.showQuestion.bind(this);

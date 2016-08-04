@@ -23,7 +23,6 @@ class Navbar extends Component {
                             {leftLink}
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
-                            <li id="nav-settings"><a href="#"><span className="glyphicon glyphicon-small glyphicon-cog"></span> Settings</a></li>
                             <li id="nav-profile">{profileButton}</li>
                         </ul>
                     </div>
@@ -32,6 +31,8 @@ class Navbar extends Component {
         )
     }
 }
+                            // <li id="nav-settings"><a href="#"><span className="glyphicon glyphicon-small glyphicon-cog"></span><span className="hidden-nano"> Settings</span></a></li>
+
 //            <div>{this.props.profile.hasOwnProperty('user_id')?this.props.profile.name+' is logged in':'not logged in'}</div>
                         // <ul className="nav navbar-nav">
                         //     <li id="nav-about"><a href="#menu">&lt; Back to menu</a></li>

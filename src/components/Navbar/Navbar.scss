@@ -11,6 +11,11 @@
 .navbar-inverse {
     background-color: #333;
 }
+.hidden-nano {
+  @media (max-width: 390px) {
+    display: none;
+  }
+}
 .nav a {
   color: #fff !important;
 }
