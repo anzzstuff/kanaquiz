@@ -21,6 +21,9 @@
         margin: 30px auto 28px;
         border-radius: 3px;
     }
+    .size-up {
+        font-size: 1.1em;
+    }
     .none {
         background-color: #aaa;
         color: #f5f5f5;
@@ -48,10 +51,24 @@
         display: flex;
         justify-content: space-between;
     }
+    .answer-form-container {
+        max-width: 100px;
+        margin: 0 auto;
+    }
     .answer-button {
         min-width: 90px;
         font-size: 2em;
         margin: 30px 0 60px;
+    }
+    .answer-input, .answer-input:focus {
+        outline: none;
+        width: 110px;
+        text-align: center;
+        font-size: 2em;
+        margin: 25px 0 60px;
+        background: none;
+        border: none;
+        border-bottom: solid 1px #aaa;
     }
     .no-hover {
         /* disables hover effect on touch screens */

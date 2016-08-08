@@ -21,13 +21,15 @@ class GameContainer extends Component {
     render() {
         return (
             <div>
-                { this.props.gameState==='chooseCharacters' ? 
-                    <ChooseCharacters selectedGroups={this.state.decidedGroups} 
-                                handleStartGame={this.startGame} 
-                                nickName={this.props.nickName} 
+                { this.props.gameState==='chooseCharacters' ?
+                    <ChooseCharacters selectedGroups={this.state.decidedGroups}
+                                handleStartGame={this.startGame}
+                                isAuthenticated={this.props.isAuthenticated}
+                                nickName={this.props.nickName}
                     /> : '' }
-                { this.props.gameState==='game' ? 
-                    <Game decidedGroups={this.state.decidedGroups} 
+                { this.props.gameState==='game' ?
+                    <Game decidedGroups={this.state.decidedGroups}
+                        handleEndGame={this.props.handleEndGame} 
                     /> : '' }
             </div>
         )

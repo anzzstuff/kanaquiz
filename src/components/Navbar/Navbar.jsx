@@ -10,11 +10,11 @@ class Navbar extends Component {
                 leftLink = <li id="nav-kanaquiz"><p className="nav navbar-text">Kana Quiz <span>2</span></p></li>
                 break;
             case 'game':
-                leftLink = <li id="nav-choosecharacters"><a href="#" onClick={this.props.handleEndGame}><span className="glyphicon glyphicon-small glyphicon-arrow-left"></span> Back to menu</a></li>
+                leftLink = <li id="nav-choosecharacters"><a href="javascript:;" onClick={this.props.handleEndGame}><span className="glyphicon glyphicon-small glyphicon-arrow-left"></span> Back to menu</a></li>
         }
         let profileButton = this.props.isAuthenticated ?
-            <a href="#" onClick={this.props.handleLogout}><span className="glyphicon glyphicon-small glyphicon-log-out"></span> Log out</a> :
-            <a href="#" onClick={this.props.handleLogin}><span className="glyphicon glyphicon-small glyphicon-log-in"></span> Log in</a>;
+            <a href="javascript:;" onClick={this.props.handleLogout}><span className="glyphicon glyphicon-small glyphicon-log-out"></span> Log out</a> :
+            <a href="javascript:;" onClick={this.props.handleLogin}><span className="glyphicon glyphicon-small glyphicon-log-in"></span> Log in</a>;
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div className="container">

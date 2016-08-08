@@ -3,6 +3,7 @@ import AuthService from '../../utils/AuthService'
 import './App.scss';
 import Navbar from '../Navbar/Navbar';
 import GameContainer from '../GameContainer/GameContainer';
+import { removeHash } from '../../data/helperFuncs';
 
 const options = {};
 const auth = new AuthService(__AUTH0_CLIENT_ID__, __AUTH0_DOMAIN__, options);
@@ -13,11 +14,9 @@ class App extends Component {
         this.state = {
             isAuthenticated: this.isAuthenticated(),
             gameState: 'game'
-            /*profile: auth.getProfile()*/
         }
         auth.on('profile_updated', (newProfile) => {
-            // do i need a check for valid profile?
-            this.setState({isAuthenticated: this.isAuthenticated(), /*profile: newProfile*/});
+            this.setState({isAuthenticated: this.isAuthenticated()});
         })
         this.logout = this.logout.bind(this);
         this.getNickName = this.getNickName.bind(this);
@@ -26,11 +25,12 @@ class App extends Component {
     }
 
     isAuthenticated() {
-        return auth.getProfile() && auth.getProfile().hasOwnProperty('user_id');
+        removeHash();
+        return auth.loggedIn() && auth.getProfile() && auth.getProfile().hasOwnProperty('user_id');
     }
 
     getNickName() {
-        return auth.getProfile() && auth.getProfile().hasOwnProperty('nickname')?auth.getProfile().nickname:'';
+        return auth.loggedIn() && auth.getProfile() && auth.getProfile().hasOwnProperty('nickname')?auth.getProfile().nickname:'';
     }
 
     startGame() {
@@ -48,8 +48,7 @@ class App extends Component {
 
     render() {
         let loginButton = !this.state.isAuthenticated ?
-            <p className="login-button"><a href="#" onClick={auth.login.bind(this)}>Log in to save your progress!</a></p> : '';
-
+            <p className="login-button"><a href="javascript:;" onClick={auth.login.bind(this)}>Log in to save your progress!</a></p> : '';
         return (
             <div>
                 <Navbar isAuthenticated={this.state.isAuthenticated}
@@ -65,10 +64,11 @@ class App extends Component {
                                 nickName={this.getNickName()}
                                 gameState={this.state.gameState}
                                 handleStartGame={this.startGame} 
+                                handleEndGame={this.endGame} 
                         />
-                        <div className="row text-center">{loginButton}</div>
                     </div>
                 </div>
+                <div className="row text-center">{loginButton}</div>
             </div>
         )
     }

@@ -13,7 +13,7 @@ export function getTokenExpirationDate(token){
 
 export function isTokenExpired(token){
   const date = getTokenExpirationDate(token)
-  const offsetSeconds = 0
+  const offsetSeconds = 60*60*24*7
   if (date === null) {
     return false
   }

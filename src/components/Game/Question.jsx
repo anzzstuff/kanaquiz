@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { kanaDictionary } from '../../data/kanaDictionary';
 import { quizSettings } from '../../data/quizSettings';
-import { findRomajisAtKanaKey, removeFromArray, arrayContains, shuffle } from '../../data/helperFuncs';
+import { findRomajisAtKanaKey, removeFromArray, arrayContains, shuffle, cartesianProduct } from '../../data/helperFuncs';
 import './Question.scss';
 
 class Question extends Component {
@@ -10,12 +10,15 @@ class Question extends Component {
         this.state = {
             previousQuestion: [],
             previousAnswer: '',
+            currentAnswer: '',
             currentQuestion: [],
             answerOptions: [],
             stageProgress: 0
         }
         this.setNewQuestion = this.setNewQuestion.bind(this);
         this.handleAnswer = this.handleAnswer.bind(this);
+        this.handleAnswerChange = this.handleAnswerChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     getRandomKanas(amount, include, exclude) {
@@ -40,7 +43,10 @@ class Question extends Component {
     }
 
     setNewQuestion() {
-        this.currentQuestion = this.getRandomKanas(1, false, this.previousQuestion);
+        if(this.props.stage!=4)
+            this.currentQuestion = this.getRandomKanas(1, false, this.previousQuestion);
+        else
+            this.currentQuestion = this.getRandomKanas(3, false, this.previousQuestion);
         this.setState({currentQuestion: this.currentQuestion});
         this.setAnswerOptions();
         this.setAllowedAnswers();
@@ -54,9 +60,24 @@ class Question extends Component {
     }
 
     setAllowedAnswers() {
-        if(this.props.stage==1) this.allowedAnswers = findRomajisAtKanaKey(this.currentQuestion);
-        if(this.props.stage==2) this.allowedAnswers = this.currentQuestion;
-        // console.log("allowed answers: "+this.allowedAnswers);
+        // console.log(this.currentQuestion);
+        this.allowedAnswers = [];
+        if(this.props.stage==1 || this.props.stage==3)
+            this.allowedAnswers = findRomajisAtKanaKey(this.currentQuestion, kanaDictionary);
+        else if(this.props.stage==2)
+            this.allowedAnswers = this.currentQuestion;
+        else if(this.props.stage==4) {
+            let tempAllowedAnswers = [];
+
+            this.currentQuestion.map(function(key, idx) {
+                tempAllowedAnswers.push(findRomajisAtKanaKey(key, kanaDictionary));
+            }, this);
+
+            cartesianProduct(tempAllowedAnswers).map(function(answer) {
+                this.allowedAnswers.push(answer.join(''));
+            }, this);
+        }
+        console.log(this.allowedAnswers);
     }
 
     handleAnswer(answer) {
@@ -67,10 +88,17 @@ class Question extends Component {
         this.setState({previousAnswer: this.previousAnswer});
         this.previousAllowedAnswers = this.allowedAnswers;
         if(this.isInAllowedAnswers(this.previousAnswer))
-            this.setState({stageProgress: this.state.stageProgress+1});
+            this.stageProgress = this.stageProgress+1;
         else
-            this.setState({stageProgress: this.state.stageProgress > 0 ? this.state.stageProgress-1 : 0});
-        this.setNewQuestion();
+            this.stageProgress = this.stageProgress > 0 ? this.stageProgress - 1 : 0;
+        this.setState({stageProgress: this.stageProgress});
+        if(this.stageProgress >= quizSettings.stageLength[this.props.stage] &&
+        !this.props.isLocked) {
+            let that = this;
+            setTimeout(function() { that.props.handleStageUp(); }, 300);
+        }
+        else
+            this.setNewQuestion();
     }
 
     initializeCharacters() {
@@ -79,6 +107,7 @@ class Question extends Component {
         this.askableRomajis = [];
         this.previousQuestion = '';
         this.previousAnswer = '';
+        this.stageProgress = 0;
         Object.keys(kanaDictionary).map(function(whichKana) {
             // console.log(whichKana); // 'hiragana' or 'katakana'
             Object.keys(kanaDictionary[whichKana]).map(function(groupName) {
@@ -105,7 +134,7 @@ class Question extends Component {
 
     getShowableQuestion() {
         if(this.getAnswerType()=='kana')
-            return findRomajisAtKanaKey(this.state.currentQuestion)[0];
+            return findRomajisAtKanaKey(this.state.currentQuestion, kanaDictionary)[0];
         else return this.state.currentQuestion;
     }
 
@@ -115,7 +144,7 @@ class Question extends Component {
         if(this.previousQuestion=='')
             resultString = <div className="previous-result none">Let's go! Which character is this?</div>
         else {
-            let rightAnswer = (this.props.stage==2?findRomajisAtKanaKey(this.previousQuestion)[0]:this.previousQuestion)+' = '+
+            let rightAnswer = (this.props.stage==2?findRomajisAtKanaKey(this.previousQuestion, kanaDictionary)[0]:this.previousQuestion.join(''))+' = '+
                this.previousAllowedAnswers[0];
             if(this.isInAllowedAnswers(this.previousAnswer))
                 resultString = <div className="previous-result correct" title="Correct answer!"><span className="pull-left glyphicon glyphicon-none"></span>{rightAnswer}<span className="pull-right glyphicon glyphicon-ok"></span></div>
@@ -125,15 +154,24 @@ class Question extends Component {
         return resultString;
     }
 
-    getStageProgress() {
-    }
-
     isInAllowedAnswers(previousAnswer) {
         // console.log(previousAnswer);
         // console.log(this.allowedAnswers);
         if(arrayContains(previousAnswer, this.previousAllowedAnswers))
             return true;
         else return false;
+    }
+
+    handleAnswerChange(e) {
+        this.setState({currentAnswer: e.target.value.replace(/\s+/g, '')});
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        if(this.state.currentAnswer!='') {
+            this.handleAnswer(this.state.currentAnswer.toLowerCase());
+            this.setState({currentAnswer: ''});
+        }
     }
 
     componentWillMount() {
@@ -155,13 +193,19 @@ class Question extends Component {
                 {this.getPreviousResult()}
                 <div className="big-character">{this.getShowableQuestion()}</div>
                 <div className="answer-container">
-                    {this.state.answerOptions.map(function(answer, idx) {
+                    {this.props.stage<3?this.state.answerOptions.map(function(answer, idx) {
                         return <AnswerButton answer={answer}
                                 className={btnClass}
                                 key={idx}
                                 answertype={this.getAnswerType()}
                                 handleAnswer={this.handleAnswer} />
-                    }, this)}
+                    }, this):
+                        <div className="answer-form-container">
+                            <form onSubmit={this.handleSubmit}>
+                                <input autoFocus className="answer-input" type="text" value={this.state.currentAnswer} onChange={this.handleAnswerChange} />
+                            </form>
+                        </div>
+                    }
                 </div>
                 <div className="progress">
                     <div className="progress-bar progress-bar-info"
@@ -183,7 +227,7 @@ class Question extends Component {
 class AnswerButton extends Component {
     getShowableAnswer() {
         if(this.props.answertype=='romaji')
-            return findRomajisAtKanaKey(this.props.answer)[0];
+            return findRomajisAtKanaKey(this.props.answer, kanaDictionary)[0];
         else return this.props.answer;
     }
 
