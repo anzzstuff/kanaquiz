@@ -77,7 +77,7 @@ class Question extends Component {
                 this.allowedAnswers.push(answer.join(''));
             }, this);
         }
-        console.log(this.allowedAnswers);
+        // console.log(this.allowedAnswers);
     }
 
     handleAnswer(answer) {
@@ -215,7 +215,7 @@ class Question extends Component {
                         aria-valuemax={quizSettings.stageLength[this.props.stage]}
                         style={stageProgressPercentageStyle}
                     >
-                        <span>Stage {this.props.stage}</span>
+                        <span>Stage {this.props.stage} {this.props.isLocked?' (Locked)':''}</span>
                     </div>
                 </div>
             </div>

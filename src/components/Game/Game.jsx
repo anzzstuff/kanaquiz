@@ -8,8 +8,6 @@ class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            stage:0,
-            isLocked: false,
             showScreen: ''
         }
         this.showQuestion = this.showQuestion.bind(this);
@@ -18,11 +16,13 @@ class Game extends Component {
     }
 
     stageUp() {
-        this.setState({stage: this.state.stage+1, showScreen: 'stage'});
+        this.props.stageUp();
+        this.setState({showScreen: 'stage'});
     }
 
     lockStage(stage) {
-        this.setState({stage: stage, showScreen: 'question', isLocked: true});
+        this.setState({showScreen: 'question'});
+        this.props.lockStage(stage);
     }
 
     showQuestion() {
@@ -30,14 +30,14 @@ class Game extends Component {
     }
 
     componentWillMount() {
-        this.stageUp();
+        this.setState({showScreen: 'stage'});
     }
 
     render() {
         return (
             <div>
-                { this.state.showScreen==='stage' ? <ShowStage lockStage={this.lockStage} handleShowQuestion={this.showQuestion} handleEndGame={this.props.handleEndGame} stage={this.state.stage} /> : '' }
-                { this.state.showScreen==='question' ? <Question isLocked={this.state.isLocked} handleStageUp={this.stageUp} stage={this.state.stage} decidedGroups={this.props.decidedGroups} /> : '' }
+                { this.state.showScreen==='stage' ? <ShowStage lockStage={this.lockStage} handleShowQuestion={this.showQuestion} handleEndGame={this.props.handleEndGame} stage={this.props.stage} /> : '' }
+                { this.state.showScreen==='question' ? <Question isLocked={this.props.isLocked} handleStageUp={this.stageUp} stage={this.props.stage} decidedGroups={this.props.decidedGroups} /> : '' }
             </div>
         );
     }

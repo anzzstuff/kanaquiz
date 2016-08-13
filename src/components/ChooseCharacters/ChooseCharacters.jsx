@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Switch from 'react-toggle-switch';
 import { kanaDictionary } from '../../data/kanaDictionary';
 import './ChooseCharacters.scss';
 import CharacterGroup from './CharacterGroup';
@@ -124,7 +125,12 @@ class ChooseCharacters extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="col-xs-12 text-center">
+                    <div className="col-sm-3 col-xs-12 pull-right">
+                        <span className="pull-right lock">Lock to stage &nbsp;
+                        {this.props.isLocked?<input className="stage-choice" type="number" min="1" max="4" maxLength="1" size="1" onChange={(e)=>this.props.lockStage(e.target.value, true)} value={this.props.stage} />:''}
+                        <Switch onClick={()=>this.props.lockStage(1)} on={this.props.isLocked} /></span>
+                    </div>
+                    <div className="col-sm-offset-3 col-sm-6 col-xs-12 text-center">
                         {this.state.errMsg!=''?(<div className="error-message">{this.state.errMsg}</div>):''}
                         <button className="btn btn-danger startgame-button" onClick={this.startGame}>Start the Quiz!</button>
                     </div>

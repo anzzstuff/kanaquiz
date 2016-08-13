@@ -13,7 +13,7 @@ class App extends Component {
         super(props);
         this.state = {
             isAuthenticated: this.isAuthenticated(),
-            gameState: 'game'
+            gameState: 'chooseCharacters'
         }
         auth.on('profile_updated', (newProfile) => {
             this.setState({isAuthenticated: this.isAuthenticated()});

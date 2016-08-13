@@ -41,6 +41,7 @@
     "jwt-decode": "^2.1.0",
     "postcss": "^5.1.0",
     "react": "^15.2.1",
-    "react-dom": "^15.2.1"
+    "react-dom": "^15.2.1",
+    "react-toggle-switch": "^2.1.2"
   }
 }

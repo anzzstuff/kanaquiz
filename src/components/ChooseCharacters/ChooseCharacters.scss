@@ -53,3 +53,52 @@
     color: #d9534f;
     padding-bottom: 10px;
 }
+.lock {
+    color: #888;
+    margin-bottom: 10px;
+}
+.stage-choice {
+    border: 1px solid #999;
+    padding-left: 5px;
+    border-radius: 5px;
+    margin-right: 5px;
+    outline: none;
+}
+.switch {
+    border: 1px solid #ccc;
+    background: #e5e5e5;
+    width: 44px;
+    height: 19px;
+    border-radius: 13px;
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    margin-top: 1px;
+}
+
+.switch-toggle {
+    border: 1px solid #999;
+    box-shadow: 1px 1px 1px #ccc;
+    width: 19px;
+    height: 17px;
+    left: 0;
+    border-radius: 12px;
+    background: #eee;
+    position: relative;
+    transition: left .2s ease-in-out;
+}
+
+.switch.on {
+    border: 1px solid #4da94f;
+    background: #5cb85c;
+}
+
+.switch.on .switch-toggle {
+    left: 23px;
+    border: 1px solid #b8ffb2;
+    background: #b8ffb2;
+}
+
+.switch.disabled {
+    cursor: not-allowed;
+}
