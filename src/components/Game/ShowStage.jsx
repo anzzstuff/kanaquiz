@@ -47,6 +47,7 @@ class ShowStage extends Component {
         if(this.props.stage<=4)
             this.timeoutID = setTimeout(this.removeStage, 1500); // how soon we start fading out (1500)
         this.showStage();
+        window.scrollTo(0,0);
     }
 
     componentWillUnmount() {
