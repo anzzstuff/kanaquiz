@@ -34,6 +34,11 @@ class GameContainer extends Component {
             this.setState({stage: stage, isLocked: !this.state.isLocked});
     }
 
+    componentWillReceiveProps() {
+        if(!this.state.isLocked)
+            this.setState({stage: 1});
+    }
+
     render() {
         return (
             <div>
