@@ -10,7 +10,7 @@ class GameContainer extends Component {
         this.state = {
             stage:1,
             isLocked: false,
-            decidedGroups: ['h_group3']
+            decidedGroups: ['h_group1']
         }
         this.stageUp = this.stageUp.bind(this);
         this.lockStage = this.lockStage.bind(this);

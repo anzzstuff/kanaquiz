@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { kanaDictionary } from '../../data/kanaDictionary';
-import './Game.scss';
 import ShowStage from './ShowStage';
 import Question from './Question';
 

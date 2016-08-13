@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.scss';
 import Navbar from '../Navbar/Navbar';
 import GameContainer from '../GameContainer/GameContainer';
+import Footer from '../Footer/Footer';
 import { removeHash } from '../../data/helperFuncs';
 
 const options = {};
@@ -40,6 +41,7 @@ class App extends Component {
                         />
                     </div>
                 </div>
+                <Footer />
             </div>
         )
     }
