@@ -40,8 +40,6 @@ class GameContainer extends Component {
                 { this.props.gameState==='chooseCharacters' ?
                     <ChooseCharacters selectedGroups={this.state.decidedGroups}
                                 handleStartGame={this.startGame}
-                                isAuthenticated={this.props.isAuthenticated}
-                                nickName={this.props.nickName}
                                 stage={this.state.stage}
                                 isLocked={this.state.isLocked}
                                 lockStage={this.lockStage}

@@ -37,10 +37,9 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "auth0-lock": "^10.0.0",
-    "jwt-decode": "^2.1.0",
     "postcss": "^5.1.0",
     "react": "^15.2.1",
+    "react-addons-css-transition-group": "^15.3.0",
     "react-dom": "^15.2.1",
     "react-toggle-switch": "^2.1.2"
   }

@@ -96,7 +96,7 @@ class ChooseCharacters extends Component {
                     <div className="col-xs-12">
                         <div className="panel panel-default">
                             <div className="panel-body welcome">
-                                <h4>Welcome to Kana Quiz{this.props.isAuthenticated && this.props.nickName !== '' && typeof this.props.nickName !== 'undefined'?', '+this.props.nickName:''}!</h4>
+                                <h4>Welcome to Kana Quiz!</h4>
                                 <p>Please choose the groups of characters that you'd like to be studying.</p>
                             </div>
                         </div>
@@ -105,7 +105,7 @@ class ChooseCharacters extends Component {
                 <div className="row">
                     <div className="col-sm-6">
                         <div className="panel panel-default">
-                            <div className="panel-heading">Hiragana · ひらがな<span className="pull-right">Progress</span></div>
+                            <div className="panel-heading">Hiragana · ひらがな</div>
                             <div className="panel-body selection-areas">
                                 {this.showGroupRows('hiragana')}
                             </div>
@@ -116,7 +116,7 @@ class ChooseCharacters extends Component {
                     </div>
                     <div className="col-sm-6">
                         <div className="panel panel-default">
-                            <div className="panel-heading">Katakana · カタカナ<span className="pull-right">Progress</span></div>
+                            <div className="panel-heading">Katakana · カタカナ</div>
                             <div className="panel-body selection-areas">
                                 {this.showGroupRows('katakana')}
                             </div>

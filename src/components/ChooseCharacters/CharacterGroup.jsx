@@ -55,7 +55,6 @@ class CharacterGroup extends Component {
                 <span className={this.props.selected ?
                     'glyphicon glyphicon-small glyphicon-check' :
                     'glyphicon glyphicon-small glyphicon-unchecked'}></span> {this.state.shownChars}
-                <span className="pull-right success-percent">0 %</span>
             </div>
         );
     }

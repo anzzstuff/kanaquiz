@@ -1,2 +1,3 @@
-# Nothing interesting here
-Early alpha of Kana Quiz remade with React.js and Auth0
+# Kana Quiz 2
+Kana Quiz remade with React.js.
+See live at http://simplemedia.org/kana/
