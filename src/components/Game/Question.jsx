@@ -22,15 +22,44 @@ class Question extends Component {
     }
 
     getRandomKanas(amount, include, exclude) {
-        // console.log(this.askableKanaKeys);
         let randomizedKanas = this.askableKanaKeys.slice();
-        // console.log(randomizedKanas);
-        if(exclude && exclude.length > 0) randomizedKanas = removeFromArray(exclude, randomizedKanas);
-        if(include && include.length > 0) {
+
+        if(exclude && exclude.length > 0) {
+            // we're excluding previous question when deciding a new question
+            randomizedKanas = removeFromArray(exclude, randomizedKanas);
+        }
+                
+        if(include && include.length > 0) { 
+            // we arrive here when we're deciding answer options (included = currentQuestion)
+            
+            // remove included kana
             randomizedKanas = removeFromArray(include, randomizedKanas);
-            // console.log(randomizedKanas);
             shuffle(randomizedKanas);
-            randomizedKanas = randomizedKanas.slice(0, amount-1);
+
+            // cut the size to make looping quicker
+            randomizedKanas = randomizedKanas.slice(0,20);
+
+            // let's remove kanas that have the same answer as included
+            let searchFor = findRomajisAtKanaKey(include, kanaDictionary)[0];
+            randomizedKanas = randomizedKanas.filter(function(character) {
+                return searchFor!=findRomajisAtKanaKey(character, kanaDictionary)[0];
+            }, this);
+            
+            // now let's remove "duplicate" kanas (if two kanas have same answers)
+            let tempRandomizedKanas = randomizedKanas.slice(); 
+            randomizedKanas = randomizedKanas.filter(function(r) {
+                let dupeFound = false;
+                searchFor = findRomajisAtKanaKey(r, kanaDictionary)[0];
+                tempRandomizedKanas.shift();
+                tempRandomizedKanas.map(function(w) {
+                    if(findRomajisAtKanaKey(w, kanaDictionary)[0]==searchFor)
+                        dupeFound = true;
+                }, this);
+                return !dupeFound;
+            }, this);
+
+            // alright, let's cut the array and add included to the end
+            randomizedKanas = randomizedKanas.slice(0, amount-1); // -1 so we have room to add included
             randomizedKanas.push(include);
             shuffle(randomizedKanas);
         }
@@ -39,7 +68,6 @@ class Question extends Component {
             randomizedKanas = randomizedKanas.slice(0, amount);
         }
         return randomizedKanas;
-        //return this.askableKanaKeys[Math.floor(Math.random() * this.askableKanaKeys.length)];
     }
 
     setNewQuestion() {

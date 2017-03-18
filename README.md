@@ -1,10 +1,10 @@
 # Kana Quiz 2
-Kana Quiz remade with React.js.
+Kana Quiz made with React.js.
 
 See live at http://simplemedia.org/kana/
 
 
-`npm install`
+Install deps: `npm install`
 
 Development: `npm start`
 

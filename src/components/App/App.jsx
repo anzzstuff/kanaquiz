@@ -41,7 +41,7 @@ class App extends Component {
                         />
                     </div>
                 </div>
-                <Footer />
+                {this.state.gameState=='chooseCharacters'?<Footer />:null}
             </div>
         )
     }

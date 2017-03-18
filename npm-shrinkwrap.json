@@ -1918,9 +1918,8 @@
     },
     "lodash": {
       "version": "4.17.4",
-      "from": "lodash@>=4.2.0 <5.0.0",
-      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.4.tgz",
-      "dev": true
+      "from": "https://registry.npmjs.org/lodash/-/lodash-4.17.4.tgz",
+      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.4.tgz"
     },
     "lodash.camelcase": {
       "version": "4.3.0",

@@ -30,6 +30,20 @@ export function findRomajisAtKanaKey(needle, kanaDictionary) {
     return romaji;
 }
 
+    // whichKanaTypeIsThis(character, kanaDictionary) { // in case if needed later
+    //     let type = null;
+    //     Object.keys(kanaDictionary).map(function(whichKana) {
+    //         Object.keys(kanaDictionary[whichKana]).map(function(groupName) {
+    //             Object.keys(kanaDictionary[whichKana][groupName]['characters']).map(function(key) {
+    //                 if(key==character) {
+    //                     type = whichKana;
+    //                 }
+    //             }, this);
+    //         }, this);
+    //     }, this);
+    //     return type;       
+    // }
+
 export function shuffle(array) {
     var i = 0
         , j = 0
