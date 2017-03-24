@@ -20,6 +20,9 @@
         padding: 8px;
         margin: 30px auto 28px;
         border-radius: 3px;
+        @media (max-width: 768px) {
+            margin: 0px auto 0px;
+        }
     }
     .size-up {
         font-size: 1.1em;
@@ -59,6 +62,9 @@
         min-width: 90px;
         font-size: 2em;
         margin: 30px 0 60px;
+        @media (max-width: 768px) {
+            margin: 0px 0 15px;
+        }
     }
     .answer-input, .answer-input:focus {
         outline: none;
@@ -69,6 +75,9 @@
         background: none;
         border: none;
         border-bottom: solid 1px #aaa;
+        @media (max-width: 768px) {
+            margin: 0px 0 25px;
+        }
     }
     .no-hover {
         /* disables hover effect on touch screens */
