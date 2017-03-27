@@ -14,6 +14,7 @@ class Footer extends Component {
 
                     <h4>Updates</h4>
                     <p>
+                        <strong>27 March 2017</strong> &middot; Bufix: Allow mobile browsers to change a locked stage number.<br />
                         <strong>24 March 2017</strong> &middot; Enhancement: Improved mobile browser usability with reduced margins.<br />
                         <strong>18 March 2017</strong> &middot; Bugfix: Fixed unintended behavior when same group was selected from both hiragana &amp; katakana. Thanks for the bug report!
                     </p>

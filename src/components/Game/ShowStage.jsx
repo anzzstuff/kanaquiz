@@ -21,17 +21,17 @@ class ShowStage extends Component {
     showStage() {
         let stageDescription;
         let stageSecondaryDescription = false;
-        if(this.props.stage===1) stageDescription = 'Choose one';
-        if(this.props.stage===2) { stageDescription = 'Choose one'; stageSecondaryDescription = 'Reverse'; }
-        if(this.props.stage===3) stageDescription = 'Write the answer';
-        if(this.props.stage===4) { stageDescription = 'Write the answer'; stageSecondaryDescription = 'Three at once'; }
+        if(this.props.stage==1) stageDescription = 'Choose one';
+        if(this.props.stage==2) { stageDescription = 'Choose one'; stageSecondaryDescription = 'Reverse'; }
+        if(this.props.stage==3) stageDescription = 'Write the answer';
+        if(this.props.stage==4) { stageDescription = 'Write the answer'; stageSecondaryDescription = 'Three at once'; }
         let stageContent = (<div className="text-center show-stage">
                 <h1>Stage {this.props.stage}</h1>
                 <h3>{stageDescription}</h3>
                 {stageSecondaryDescription?<h4>{stageSecondaryDescription}</h4>:''}
             </div>);
 
-        if(this.props.stage===5) {
+        if(this.props.stage==5) {
             stageContent = (<div className="text-center show-end">
                 <h1>Congratulations!</h1>
                 <h3>You have passed all 4 stages.</h3>

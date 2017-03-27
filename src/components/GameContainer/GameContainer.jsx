@@ -17,6 +17,11 @@ class GameContainer extends Component {
     }
 
     startGame(decidedGroups) {
+        if(parseInt(this.state.stage)<1 || isNaN(parseInt(this.state.stage)))
+            this.setState({stage: 1});
+        else if(parseInt(this.state.stage)>4)
+            this.setState({stage: 4});
+
         this.setState({decidedGroups: decidedGroups});
         this.props.handleStartGame();
     }
@@ -26,8 +31,7 @@ class GameContainer extends Component {
     }
 
     lockStage(stage, forceLock) {
-        stage = parseInt(stage) || 1;
-        if(stage<1 || stage>4) stage=1;
+        // if(stage<1 || stage>4) stage=1; // don't use this to allow backspace
         if(forceLock)
             this.setState({stage: stage, isLocked: true});
         else
