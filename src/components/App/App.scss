@@ -39,3 +39,20 @@ body {
     content: "\2122";
     color: transparent !important;
 }
+#footer {
+    /* used in demo */
+    color: #777;
+    font-size: 0.9em;
+    line-height: 1.8em;
+    h4 {
+        margin-top: 20px;
+        color: #d9534f;
+    }
+    a {
+        text-decoration: underline;
+    }
+    #copyright {
+        border-top: 1px #aaa solid;
+        padding: 10px 0px;
+    }
+}

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.scss';
 import Navbar from '../Navbar/Navbar';
 import GameContainer from '../GameContainer/GameContainer';
-import Footer from '../Footer/Footer';
 import { removeHash } from '../../data/helperFuncs';
 
 const options = {};
@@ -25,6 +24,16 @@ class App extends Component {
         this.setState({gameState: 'chooseCharacters'});
     }
 
+    componentWillUpdate(nextProps, nextState) {
+        // This is primarily for demo site purposes. Hides footer when game is on.
+        if(document.getElementById('footer')) {
+            if(nextState.gameState=='chooseCharacters')
+                document.getElementById('footer').style.visibility = "visible";
+            else
+                document.getElementById('footer').style.visibility = "hidden";
+        }
+    }
+
     render() {
         return (
             <div>
@@ -41,7 +50,6 @@ class App extends Component {
                         />
                     </div>
                 </div>
-                {this.state.gameState=='chooseCharacters'?<Footer />:null}
             </div>
         )
     }
