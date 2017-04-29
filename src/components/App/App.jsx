@@ -34,6 +34,11 @@ class App extends Component {
         }
     }
 
+    componentWillMount() {
+        if(document.getElementById('footer'))
+            document.getElementById('footer').style.visibility = "visible";
+    }
+
     render() {
         return (
             <div>
