@@ -25,18 +25,18 @@ class App extends Component {
     }
 
     componentWillUpdate(nextProps, nextState) {
-        // This is primarily for demo site purposes. Hides footer when game is on.
+        // This is primarily for demo site purposes. Hides #footer when game is on.
         if(document.getElementById('footer')) {
             if(nextState.gameState=='chooseCharacters')
-                document.getElementById('footer').style.visibility = "visible";
+                document.getElementById('footer').style.display = "block";
             else
-                document.getElementById('footer').style.visibility = "hidden";
+                document.getElementById('footer').style.display = "none";
         }
     }
 
     componentWillMount() {
         if(document.getElementById('footer'))
-            document.getElementById('footer').style.visibility = "visible";
+            document.getElementById('footer').style.display = "block";
     }
 
     render() {
