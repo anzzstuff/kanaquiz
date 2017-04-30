@@ -4,8 +4,10 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 module.exports = {
+    context: __dirname,
     devtool: 'cheap-module-source-map',
     entry: [
         './src/index'
@@ -36,7 +38,17 @@ module.exports = {
                     return [autoprefixer, precss];
                 }
             }
-        })        
+        }),
+        new SWPrecacheWebpackPlugin( {
+            cacheId: 'kana-quiz',
+            filename: 'sw.js',
+            maximumFileSizeToCacheInBytes: 4194304,
+            minify: true,
+            runtimeCaching: [{
+                handler: 'cacheFirst',
+                urlPattern: /\.(woff2|svg|ttf|eot|woff|html)$/,
+            }],
+        })
     ],
     module: {
         loaders: [
@@ -51,12 +63,12 @@ module.exports = {
                 test: /\.css$/,
                 loaders: ['style-loader', 'css-loader']
             }, {
-                test: /\.(png|jpg|svg|woff|woff2)?(\?v=\d+.\d+.\d+)?$/, 
+                test: /\.(png|jpg|svg|woff|woff2)?(\?v=\d+.\d+.\d+)?$/,
                 loader: 'url-loader?limit=8192'
             }, {
-                test: /\.(eot|ttf)$/, 
+                test: /\.(eot|ttf)$/,
                 loader: 'file-loader'
-            }            
+            }
         ]
     }
 };
