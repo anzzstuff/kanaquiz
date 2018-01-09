@@ -52,12 +52,36 @@ class ChooseCharacters extends Component {
         this.setState({errMsg: '', selectedGroups: newSelectedGroups});
     }
 
+    selectAllAlternative(whichKana) {
+        let thisKana = kanaDictionary[whichKana];
+        let newSelectedGroups = this.state.selectedGroups.slice();
+        Object.keys(thisKana).map(function(groupName) {
+            if(groupName.endsWith("_a"))
+                newSelectedGroups.push(groupName);
+        }, this);
+        this.setState({errMsg: '', selectedGroups: newSelectedGroups});
+    }
+
     selectNone(whichKana) {
         let newSelectedGroups = [];
         this.state.selectedGroups.map(function(groupName) {
             let mustBeRemoved = false;
             Object.keys(kanaDictionary[whichKana]).map(function(removableGroupName) {
                 if(removableGroupName===groupName)
+                    mustBeRemoved = true;
+            }, this);
+            if(!mustBeRemoved)
+                newSelectedGroups.push(groupName);
+        }, this);
+        this.setState({selectedGroups: newSelectedGroups});
+    }
+
+     selectNoneAlternative(whichKana) {
+        let newSelectedGroups = [];
+        this.state.selectedGroups.map(function(groupName) {
+            let mustBeRemoved = false;
+            Object.keys(kanaDictionary[whichKana]).map(function(removableGroupName) {
+                if(removableGroupName===groupName && groupName.endsWith("_a"))
                     mustBeRemoved = true;
             }, this);
             if(!mustBeRemoved)
@@ -111,6 +135,8 @@ class ChooseCharacters extends Component {
                             </div>
                             <div className="panel-footer text-center">
                                 <a href="javascript:;" onClick={()=>this.selectAll('hiragana')}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNone('hiragana')}>None</a>
+                                &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectAllAlternative('hiragana')}>All alternative</a>
+                                &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNoneAlternative('hiragana')}>No alternative</a>
                             </div>
                         </div>
                     </div>
@@ -122,6 +148,8 @@ class ChooseCharacters extends Component {
                             </div>
                             <div className="panel-footer text-center">
                                 <a href="javascript:;" onClick={()=>this.selectAll('katakana')}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNone('katakana')}>None</a>
+                                &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectAllAlternative('katakana')}>All alternative</a>
+                                &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNoneAlternative('katakana')}>No alternative</a>
                             </div>
                         </div>
                     </div>

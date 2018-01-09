@@ -10,8 +10,17 @@ export const kanaDictionary = {
         'h_group8': { characters: { 'や': ['ya'], 'ゆ': ['yu'], 'よ': ['yo'] } },
         'h_group9': { characters: { 'ら': ['ra'], 'り': ['ri'], 'る': ['ru'], 'れ': ['re'], 'ろ': ['ro'] } },
         'h_group10': { characters: { 'わ': ['wa'], 'を': ['wo','o'], 'ん': ['n'] } },
-        'h_group11': { characters: { 'が': ['ga'], 'ぎ': ['gi'], 'ぐ': ['gu'], 'げ': ['ge'], 'ご': ['go'], 'ざ': ['za'], 'じ': ['ji','zi'], 'ず': ['zu','du'], 'ぜ': ['ze'], 'ぞ': ['zo'], 'だ': ['da'], 'ぢ': ['ji','di','dzi'], 'づ': ['zu','dzu'], 'で': ['de'], 'ど': ['do'], 'ば': ['ba'], 'び': ['bi'], 'ぶ': ['bu'], 'べ': ['be'], 'ぼ': ['bo'], 'ぱ': ['pa'], 'ぴ': ['pi'], 
-        'ぷ': ['pu'], 'ぺ': ['pe'], 'ぽ': ['po'], 'きゃ': ['kya'], 'きゅ': ['kyu'], 'きょ': ['kyo'], 'しゃ': ['sha','sya'], 'しゅ': ['shu','syu'], 'しょ': ['sho','syo'], 'ちゃ': ['cha','cya'], 'ちゅ': ['chu','cyu'], 'ちょ': ['cho','cyo'], 'にゃ': ['nya'], 'にゅ': ['nyu'], 'にょ': ['nyo'], 'ひゃ': ['hya'], 'ひゅ': ['hyu'], 'ひょ': ['hyo'], 'みゃ': ['mya'], 'みゅ': ['myu'], 'みょ': ['myo'], 'りゃ': ['rya'], 'りゅ': ['ryu'], 'りょ': ['ryo'], 'ぎゃ': ['gya'], 'ぎゅ': ['gyu'], 'ぎょ': ['gyo'], 'じゃ': ['ja','jya'], 'じゅ': ['ju','jyu'], 'じょ': ['jo','jyo'], 'びゃ': ['bya'], 'びゅ': ['byu'], 'びょ': ['byo'], 'ぴゃ': ['pya'], 'ぴゅ': ['pyu'], 'ぴょ': ['pyo'] } }
+        'h_group11_a': { characters: { 'が': ['ga'], 'ぎ': ['gi'], 'ぐ': ['gu'], 'げ': ['ge'], 'ご': ['go'] } },
+        'h_group12_a': { characters: { 'ざ': ['za'], 'じ': ['ji','zi'], 'ず': ['zu','du'], 'ぜ': ['ze'], 'ぞ': ['zo'] } },
+        'h_group13_a': { characters: { 'だ': ['da'], 'ぢ': ['ji','di','dzi'], 'づ': ['zu','dzu'], 'で': ['de'], 'ど': ['do'] } },
+        'h_group14_a': { characters: { 'ば': ['ba'], 'び': ['bi'], 'ぶ': ['bu'], 'べ': ['be'], 'ぼ': ['bo'] } },
+        'h_group15_a': { characters: { 'ぱ': ['pa'], 'ぴ': ['pi'], 'ぷ': ['pu'], 'ぺ': ['pe'], 'ぽ': ['po'] } },
+        'h_group16_a': { characters: { 'きゃ': ['kya'], 'きゅ': ['kyu'], 'きょ': ['kyo'], 'しゃ': ['sha','sya'], 'しゅ': ['shu','syu'], 'しょ': ['sho','syo'] } },
+        'h_group17_a': { characters: { 'ちゃ': ['cha','cya'], 'ちゅ': ['chu','cyu'], 'ちょ': ['cho','cyo'], 'にゃ': ['nya'], 'にゅ': ['nyu'], 'にょ': ['nyo'] } },
+        'h_group18_a': { characters: { 'ひゃ': ['hya'], 'ひゅ': ['hyu'], 'ひょ': ['hyo'], 'みゃ': ['mya'], 'みゅ': ['myu'], 'みょ': ['myo'] } },
+        'h_group19_a': { characters: { 'りゃ': ['rya'], 'りゅ': ['ryu'], 'りょ': ['ryo'], 'ぎゃ': ['gya'], 'ぎゅ': ['gyu'], 'ぎょ': ['gyo'] } },
+        'h_group20_a': { characters: { 'じゃ': ['ja','jya'], 'じゅ': ['ju','jyu'], 'じょ': ['jo','jyo'], 'びゃ': ['bya'], 'びゅ': ['byu'], 'びょ': ['byo'] } },
+        'h_group21_a': { characters: { 'ぴゃ': ['pya'], 'ぴゅ': ['pyu'], 'ぴょ': ['pyo'] } }
     },
     'katakana' : {
         'k_group1': { characters: { 'ア': ['a'], 'イ': ['i'], 'ウ': ['u'], 'エ': ['e'], 'オ': ['o'] } },
@@ -24,7 +33,21 @@ export const kanaDictionary = {
         'k_group8': { characters: { 'ヤ': ['ya'], 'ユ': ['yu'], 'ヨ': ['yo'] } },
         'k_group9': { characters: { 'ラ': ['ra'], 'リ': ['ri'], 'ル': ['ru'], 'レ': ['re'], 'ロ': ['ro'] } },
         'k_group10': { characters: { 'ワ': ['wa'], 'ヲ': ['wo','o'], 'ン': ['n'] } },
-        'k_group11': { characters: { 'ガ': ['ga'], 'ギ': ['gi'], 'グ': ['gu'], 'ゲ': ['ge'], 'ゴ': ['go'], 'ザ': ['za'], 'ジ': ['ji','zi'], 'ズ': ['zu','du'], 'ゼ': ['ze'], 'ゾ': ['zo'], 'ダ': ['da'], 'ヂ': ['ji','di','dzi'], 'ヅ': ['zu','dzu'], 'デ': ['de'], 'ド': ['do'], 'バ': ['ba'], 'ビ': ['bi'], 'ブ': ['bu'], 'ベ': ['be'], 'ボ': ['bo'], 'パ': ['pa'], 'ピ': ['pi'], 
-        'プ': ['pu'], 'ペ': ['pe'], 'ポ': ['po'], 'キャ': ['kya'], 'キュ': ['kyu'], 'キョ': ['kyo'], 'シャ': ['sha','sya'], 'シュ': ['shu','syu'], 'ショ': ['sho','syo'], 'チャ': ['cha','cya'], 'チュ': ['chu','cyu'], 'チョ': ['cho','cyo'], 'ニャ': ['nya'], 'ニュ': ['nyu'], 'ニョ': ['nyo'], 'ヒャ': ['hya'], 'ヒュ': ['hyu'], 'ヒョ': ['hyo'], 'ミャ': ['mya'], 'ミュ': ['myu'], 'ミョ': ['myo'], 'リャ': ['rya'], 'リュ': ['ryu'], 'リョ': ['ryo'], 'ギャ': ['gya'], 'ギュ': ['gyu'], 'ギョ': ['gyo'], 'ジャ': ['ja','jya'], 'ジュ': ['ju','jyu'], 'ジョ': ['jo','jyo'], 'ビャ': ['bya'], 'ビュ': ['byu'], 'ビョ': ['byo'], 'ピャ': ['pya'], 'ピュ': ['pyu'], 'ピョ': ['pyo'] } }
+        'k_group11_a': { characters: { 'ガ': ['ga'], 'ギ': ['gi'], 'グ': ['gu'], 'ゲ': ['ge'], 'ゴ': ['go'] } },
+        'k_group12_a': { characters: { 'ザ': ['za'], 'ジ': ['ji','zi'], 'ズ': ['zu','du'], 'ゼ': ['ze'], 'ゾ': ['zo'] } },
+        'k_group13_a': { characters: { 'ダ': ['da'], 'ヂ': ['ji','di','dzi'], 'ヅ': ['zu','dzu'], 'デ': ['de'], 'ド': ['do'] } },
+        'k_group14_a': { characters: { 'バ': ['ba'], 'ビ': ['bi'], 'ブ': ['bu'], 'ベ': ['be'], 'ボ': ['bo'] } },
+        'k_group15_a': { characters: { 'パ': ['pa'], 'ピ': ['pi'], 'プ': ['pu'], 'ペ': ['pe'], 'ポ': ['po'] } },
+        'k_group16_a': { characters: { 'キャ': ['kya'], 'キュ': ['kyu'], 'キョ': ['kyo'] } },
+        'k_group17_a': { characters: { 'シャ': ['sha','sya'], 'シュ': ['shu','syu'], 'ショ': ['sho','syo'] } },
+        'k_group18_a': { characters: { 'チャ': ['cha','cya'], 'チュ': ['chu','cyu'], 'チョ': ['cho','cyo'] } },
+        'k_group19_a': { characters: { 'ニャ': ['nya'], 'ニュ': ['nyu'], 'ニョ': ['nyo'] } },
+        'k_group20_a': { characters: { 'ヒャ': ['hya'], 'ヒュ': ['hyu'], 'ヒョ': ['hyo'] } },
+        'k_group21_a': { characters: { 'ミャ': ['mya'], 'ミュ': ['myu'], 'ミョ': ['myo'] } },
+        'k_group22_a': { characters: { 'リャ': ['rya'], 'リュ': ['ryu'], 'リョ': ['ryo'] } },
+        'k_group23_a': { characters: { 'ギャ': ['gya'], 'ギュ': ['gyu'], 'ギョ': ['gyo'] } },
+        'k_group24_a': { characters: { 'ジャ': ['ja','jya'], 'ジュ': ['ju','jyu'], 'ジョ': ['jo','jyo'] } },
+        'k_group25_a': { characters: { 'ビャ': ['bya'], 'ビュ': ['byu'], 'ビョ': ['byo'] } },
+        'k_group26_a': { characters: { 'ピャ': ['pya'], 'ピュ': ['pyu'], 'ピョ': ['pyo'] } }
     }
 };
