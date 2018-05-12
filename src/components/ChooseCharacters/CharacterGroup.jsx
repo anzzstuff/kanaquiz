@@ -16,7 +16,7 @@ class CharacterGroup extends Component {
     getShowableCharacters(whichKana) {
         let strRomajiCharacters = '';
         let strKanaCharacters = '';
-        if(this.props.groupName!='h_group11' && this.props.groupName!='k_group11') {
+        if(this.props.groupName!='h_group11' && this.props.groupName!='k_group11' && this.props.groupName!='k_group12') {
             Object.keys(this.props.characters).map(function(character) {
                 strRomajiCharacters+=this.props.characters[character][0]+' · ';
                 strKanaCharacters+=character+' · ';
@@ -31,6 +31,10 @@ class CharacterGroup extends Component {
         else if(this.props.groupName=='k_group11') {
             strRomajiCharacters = 'ga · ba · da · kya · sha... (58 characters)';
             strKanaCharacters = 'ガ · バ · ダ · キャ · シャ... (58 characters)';
+        }
+        else if(this.props.groupName=='k_group12') {
+            strRomajiCharacters = 'shi · tsu · so · n · no... (Hard characters)';
+            strKanaCharacters = 'シ · ツ · ソ · ン · ノ... (Hard characters)';
         }
         if(whichKana=='romaji') return strRomajiCharacters;
         else return strKanaCharacters;
