@@ -16,22 +16,12 @@ class CharacterGroup extends Component {
     getShowableCharacters(whichKana) {
         let strRomajiCharacters = '';
         let strKanaCharacters = '';
-        if(this.props.groupName!='h_group11' && this.props.groupName!='k_group11') {
-            Object.keys(this.props.characters).map(function(character) {
-                strRomajiCharacters+=this.props.characters[character][0]+' · ';
-                strKanaCharacters+=character+' · ';
-            }, this);
-            strRomajiCharacters = strRomajiCharacters.slice(0, -2);
-            strKanaCharacters = strKanaCharacters.slice(0, -2);
-        }
-        else if(this.props.groupName=='h_group11') {
-            strRomajiCharacters = 'ga · ba · da · kya · sha... (58 characters)';
-            strKanaCharacters = 'ぎ · ば · だ · きゃ · しゃ... (58 characters)';
-        }
-        else if(this.props.groupName=='k_group11') {
-            strRomajiCharacters = 'ga · ba · da · kya · sha... (58 characters)';
-            strKanaCharacters = 'ガ · バ · ダ · キャ · シャ... (58 characters)';
-        }
+        Object.keys(this.props.characters).map(function(character) {
+            strRomajiCharacters+=this.props.characters[character][0]+' · ';
+            strKanaCharacters+=character+' · ';
+        }, this);
+        strRomajiCharacters = strRomajiCharacters.slice(0, -2);
+        strKanaCharacters = strKanaCharacters.slice(0, -2);
         if(whichKana=='romaji') return strRomajiCharacters;
         else return strKanaCharacters;
     }
@@ -42,7 +32,7 @@ class CharacterGroup extends Component {
 
     render() {
         return (
-            <div className="choose-row"
+            <div className={'choose-row' + (this.props.groupName.endsWith('_a') ? ' alt-row' : '')}
                 onClick={()=>{
                     this.props.handleToggleSelect(this.props.groupName);
                     this.changeShownChars(this.getShowableCharacters('romaji'));

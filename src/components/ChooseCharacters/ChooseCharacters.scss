@@ -25,6 +25,13 @@
     .choose-row:not(:last-child) {
         border-bottom: 1px #eee solid;
     }
+    .alt-row {
+        padding-left: 20px;
+        background-color: #fafafa;
+    }
+    .toggle-caret {
+        margin: 0 4px;
+    }
     @media (min-width: 768px) {
         .choose-row:hover {
             background-color: #f4f4f4;
@@ -38,6 +45,9 @@
     }
     .glyphicon-check {
         color: green;
+    }
+    .glyphicon-check.half {
+        color: #ccc;
     }
     .glyphicon-unchecked {
         color: #ccc;
@@ -71,7 +81,7 @@
     height: 19px;
     border-radius: 13px;
     cursor: pointer;
-    display: inline-block;
+    display: block;
     float: right;
     margin-top: 1px;
 }
