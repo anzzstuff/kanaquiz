@@ -9,7 +9,8 @@ class ChooseCharacters extends Component {
         super(props);
         this.state = {
             errMsg : '',
-            selectedGroups: this.props.selectedGroups
+            selectedGroups: this.props.selectedGroups,
+            showAlternatives: []
         }
         this.startGame = this.startGame.bind(this);
         this.showGroupRows = this.showGroupRows.bind(this);
@@ -90,19 +91,84 @@ class ChooseCharacters extends Component {
         this.setState({selectedGroups: newSelectedGroups});
     }
 
-    showGroupRows(whichKana) {
-        let thisKana = kanaDictionary[whichKana];
-        return Object.keys(thisKana).map(function(groupName, idx) {
-            return (
-                <CharacterGroup
+    toggleAlternative(whichKana) {
+        const idx = this.state.showAlternatives.indexOf(whichKana);
+        let newShowAlternatives = this.state.showAlternatives;
+        if(idx >= 0)
+            newShowAlternatives.splice(idx, 1);
+        else
+            newShowAlternatives.push(whichKana)
+        this.setState({showAlternatives: newShowAlternatives});
+    }
+
+    getSelectedAlternatives(whichKana) {
+        return this.state.selectedGroups.filter(groupName => {
+            return groupName.startsWith(whichKana == 'hiragana' ? 'h_' : 'k_') &&
+                groupName.endsWith('_a');
+        }).length;
+    }
+
+    getAmountOfAlternatives(whichKana) {
+        return Object.keys(kanaDictionary[whichKana]).filter(groupName => {
+            return groupName.endsWith("_a");
+        }).length;
+    }
+
+    alternativeToggleRow(whichKana, showAlternatives) {
+        let checkBtn = "glyphicon glyphicon-small glyphicon-"
+        let status;
+        if(this.getSelectedAlternatives(whichKana) >= this.getAmountOfAlternatives(whichKana))
+            status = 'check';
+        else if(this.getSelectedAlternatives(whichKana) > 0)
+            status = 'check half';
+        else
+            status = 'unchecked'
+        checkBtn += status
+
+        return <div 
+            key={'alt_toggle_' + whichKana} 
+            onClick={() => this.toggleAlternative(whichKana)}
+            className="choose-row"
+        >
+            <span 
+                className={checkBtn}
+                onClick={ e => {
+                    if(status == 'check')
+                        this.selectNoneAlternative(whichKana);
+                    else if(status == 'check half')
+                        this.selectAllAlternative(whichKana);
+                    else if(status == 'unchecked')
+                        this.selectAllAlternative(whichKana);
+                    e.stopPropagation();
+                }}
+            ></span>
+            {
+                showAlternatives ? <span className="toggle-caret">&#9650;</span> 
+                : <span className="toggle-caret">&#9660;</span>
+            } 
+            Alternative characters (ga · ba · kya · sha..)
+        </div>
+    }
+
+    showGroupRows(whichKana, showAlternatives) {
+        const thisKana = kanaDictionary[whichKana];
+        let rows = [];
+        Object.keys(thisKana).forEach(function(groupName, idx) {
+            if(groupName.endsWith("group11_a"))
+                rows.push(this.alternativeToggleRow(whichKana, showAlternatives));
+
+            if(!groupName.endsWith("a") || showAlternatives) {
+                rows.push(<CharacterGroup
                     key={idx}
                     groupName={groupName}
                     selected={this.isSelected(groupName)}
                     characters={thisKana[groupName].characters}
                     handleToggleSelect={this.toggleSelect}
-                />
-            );
+                />);
+            }
         }, this);
+
+        return rows;
     }
 
     startGame() {
@@ -131,7 +197,7 @@ class ChooseCharacters extends Component {
                         <div className="panel panel-default">
                             <div className="panel-heading">Hiragana · ひらがな</div>
                             <div className="panel-body selection-areas">
-                                {this.showGroupRows('hiragana')}
+                                {this.showGroupRows('hiragana', this.state.showAlternatives.indexOf('hiragana') >= 0)}
                             </div>
                             <div className="panel-footer text-center">
                                 <a href="javascript:;" onClick={()=>this.selectAll('hiragana')}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNone('hiragana')}>None</a>
@@ -144,7 +210,7 @@ class ChooseCharacters extends Component {
                         <div className="panel panel-default">
                             <div className="panel-heading">Katakana · カタカナ</div>
                             <div className="panel-body selection-areas">
-                                {this.showGroupRows('katakana')}
+                                {this.showGroupRows('katakana', this.state.showAlternatives.indexOf('katakana') >= 0)}
                             </div>
                             <div className="panel-footer text-center">
                                 <a href="javascript:;" onClick={()=>this.selectAll('katakana')}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNone('katakana')}>None</a>

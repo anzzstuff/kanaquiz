@@ -32,7 +32,7 @@ class CharacterGroup extends Component {
 
     render() {
         return (
-            <div className="choose-row"
+            <div className={'choose-row' + (this.props.groupName.endsWith('_a') ? ' alt-row' : '')}
                 onClick={()=>{
                     this.props.handleToggleSelect(this.props.groupName);
                     this.changeShownChars(this.getShowableCharacters('romaji'));
