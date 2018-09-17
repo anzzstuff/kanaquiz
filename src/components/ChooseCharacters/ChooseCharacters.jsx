@@ -146,7 +146,7 @@ class ChooseCharacters extends Component {
                 showAlternatives ? <span className="toggle-caret">&#9650;</span> 
                 : <span className="toggle-caret">&#9660;</span>
             } 
-            Alternative characters (ga · ba · kya · sha..)
+            Alternative characters (ga · ba · kya..)
         </div>
     }
 
