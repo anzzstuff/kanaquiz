@@ -12,11 +12,8 @@ class ChooseCharacters extends Component {
             selectedGroups: this.props.selectedGroups,
             showAlternatives: []
         }
-        this.startGame = this.startGame.bind(this);
-        this.showGroupRows = this.showGroupRows.bind(this);
         this.toggleSelect = this.toggleSelect.bind(this);
-        this.selectAll = this.selectAll.bind(this);
-        this.selectNone = this.selectNone.bind(this);
+        this.startGame = this.startGame.bind(this);
     }
 
     getIndex(groupName) {
@@ -28,7 +25,8 @@ class ChooseCharacters extends Component {
     }
 
     removeSelect(groupName) {
-        if(this.getIndex(groupName)<0) return;
+        if(this.getIndex(groupName)<0)
+            return;
         let newSelectedGroups = this.state.selectedGroups.slice();
         newSelectedGroups.splice(this.getIndex(groupName), 1);
         this.setState({selectedGroups: newSelectedGroups});
@@ -39,55 +37,41 @@ class ChooseCharacters extends Component {
     }
 
     toggleSelect(groupName) {
-        if(this.getIndex(groupName) > -1) this.removeSelect(groupName);
-        else this.addSelect(groupName);
+        if(this.getIndex(groupName) > -1)
+            this.removeSelect(groupName);
+        else
+            this.addSelect(groupName);
     }
 
-    selectAll(whichKana) {
-        let thisKana = kanaDictionary[whichKana];
+    selectAll(whichKana, altOnly=false, similarOnly=false) {
+        const thisKana = kanaDictionary[whichKana];
         let newSelectedGroups = this.state.selectedGroups.slice();
-        Object.keys(thisKana).map(function(groupName) {
-            if(!this.isSelected(groupName))
+        Object.keys(thisKana).forEach(groupName => {
+            if(!this.isSelected(groupName) && (
+                (altOnly && groupName.endsWith('_a')) ||
+                (similarOnly && groupName.endsWith('_s')) ||
+                (!altOnly && !similarOnly)
+            ))
                 newSelectedGroups.push(groupName);
-        }, this);
+        });
         this.setState({errMsg: '', selectedGroups: newSelectedGroups});
     }
 
-    selectAllAlternative(whichKana) {
-        let thisKana = kanaDictionary[whichKana];
-        let newSelectedGroups = this.state.selectedGroups.slice();
-        Object.keys(thisKana).map(function(groupName) {
-            if(groupName.endsWith("_a"))
-                newSelectedGroups.push(groupName);
-        }, this);
-        this.setState({errMsg: '', selectedGroups: newSelectedGroups});
-    }
-
-    selectNone(whichKana) {
+    selectNone(whichKana, altOnly=false, similarOnly=false) {
         let newSelectedGroups = [];
-        this.state.selectedGroups.map(function(groupName) {
+        this.state.selectedGroups.forEach(groupName => {
             let mustBeRemoved = false;
-            Object.keys(kanaDictionary[whichKana]).map(function(removableGroupName) {
-                if(removableGroupName===groupName)
+            Object.keys(kanaDictionary[whichKana]).forEach(removableGroupName => {
+                if(removableGroupName === groupName && (
+                    (altOnly && groupName.endsWith('_a')) ||
+                    (similarOnly && groupName.endsWith('_s')) ||
+                    (!altOnly && !similarOnly)
+                ))
                     mustBeRemoved = true;
-            }, this);
+            });
             if(!mustBeRemoved)
                 newSelectedGroups.push(groupName);
-        }, this);
-        this.setState({selectedGroups: newSelectedGroups});
-    }
-
-     selectNoneAlternative(whichKana) {
-        let newSelectedGroups = [];
-        this.state.selectedGroups.map(function(groupName) {
-            let mustBeRemoved = false;
-            Object.keys(kanaDictionary[whichKana]).map(function(removableGroupName) {
-                if(removableGroupName===groupName && groupName.endsWith("_a"))
-                    mustBeRemoved = true;
-            }, this);
-            if(!mustBeRemoved)
-                newSelectedGroups.push(groupName);
-        }, this);
+        });
         this.setState({selectedGroups: newSelectedGroups});
     }
 
@@ -125,27 +109,25 @@ class ChooseCharacters extends Component {
             status = 'unchecked'
         checkBtn += status
 
-        return <div 
-            key={'alt_toggle_' + whichKana} 
+        return <div
+            key={'alt_toggle_' + whichKana}
             onClick={() => this.toggleAlternative(whichKana)}
             className="choose-row"
         >
-            <span 
+            <span
                 className={checkBtn}
                 onClick={ e => {
                     if(status == 'check')
-                        this.selectNoneAlternative(whichKana);
-                    else if(status == 'check half')
-                        this.selectAllAlternative(whichKana);
-                    else if(status == 'unchecked')
-                        this.selectAllAlternative(whichKana);
+                        this.selectNone(whichKana, true);
+                    else if(status == 'check half' || status == 'unchecked')
+                        this.selectAll(whichKana, true);
                     e.stopPropagation();
                 }}
             ></span>
             {
-                showAlternatives ? <span className="toggle-caret">&#9650;</span> 
+                showAlternatives ? <span className="toggle-caret">&#9650;</span>
                 : <span className="toggle-caret">&#9660;</span>
-            } 
+            }
             Alternative characters (ga · ba · kya..)
         </div>
     }
@@ -153,7 +135,7 @@ class ChooseCharacters extends Component {
     showGroupRows(whichKana, showAlternatives) {
         const thisKana = kanaDictionary[whichKana];
         let rows = [];
-        Object.keys(thisKana).forEach(function(groupName, idx) {
+        Object.keys(thisKana).forEach((groupName, idx) => {
             if(groupName.endsWith("group11_a"))
                 rows.push(this.alternativeToggleRow(whichKana, showAlternatives));
 
@@ -166,7 +148,7 @@ class ChooseCharacters extends Component {
                     handleToggleSelect={this.toggleSelect}
                 />);
             }
-        }, this);
+        });
 
         return rows;
     }
@@ -200,9 +182,10 @@ class ChooseCharacters extends Component {
                                 {this.showGroupRows('hiragana', this.state.showAlternatives.indexOf('hiragana') >= 0)}
                             </div>
                             <div className="panel-footer text-center">
-                                <a href="javascript:;" onClick={()=>this.selectAll('hiragana')}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNone('hiragana')}>None</a>
-                                &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectAllAlternative('hiragana')}>All alternative</a>
-                                &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNoneAlternative('hiragana')}>No alternative</a>
+                                <a href="javascript:;" onClick={()=>this.selectAll('hiragana')}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;"
+                                    onClick={()=>this.selectNone('hiragana')}>None</a>
+                                &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectAll('hiragana', true)}>All alternative</a>
+                                &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNone('hiragana', true)}>No alternative</a>
                             </div>
                         </div>
                     </div>
@@ -213,19 +196,30 @@ class ChooseCharacters extends Component {
                                 {this.showGroupRows('katakana', this.state.showAlternatives.indexOf('katakana') >= 0)}
                             </div>
                             <div className="panel-footer text-center">
-                                <a href="javascript:;" onClick={()=>this.selectAll('katakana')}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNone('katakana')}>None</a>
-                                &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectAllAlternative('katakana')}>All alternative</a>
-                                &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNoneAlternative('katakana')}>No alternative</a>
+                                <a href="javascript:;" onClick={()=>this.selectAll('katakana')}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;"
+                                    onClick={()=>this.selectNone('katakana')}>None
+                                </a>
+                                &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectAll('katakana', true)}>All alternative</a>
+                                &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNone('katakana', true)}>No alternative</a>
                             </div>
                         </div>
                     </div>
                     <div className="col-sm-3 col-xs-12 pull-right">
                         <span className="pull-right lock">Lock to stage &nbsp;
-                        {this.props.isLocked?<input className="stage-choice" type="number" min="1" max="4" maxLength="1" size="1" onChange={(e)=>this.props.lockStage(e.target.value, true)} value={this.props.stage} />:''}
+                            {
+                                this.props.isLocked &&
+                                    <input className="stage-choice" type="number" min="1" max="4" maxLength="1" size="1"
+                                        onChange={(e)=>this.props.lockStage(e.target.value, true)}
+                                        value={this.props.stage}
+                                    />
+                            }
                         <Switch onClick={()=>this.props.lockStage(1)} on={this.props.isLocked} /></span>
                     </div>
                     <div className="col-sm-offset-3 col-sm-6 col-xs-12 text-center">
-                        {this.state.errMsg!=''?(<div className="error-message">{this.state.errMsg}</div>):''}
+                        {
+                            this.state.errMsg != '' &&
+                                <div className="error-message">{this.state.errMsg}</div>
+                        }
                         <button className="btn btn-danger startgame-button" onClick={this.startGame}>Start the Quiz!</button>
                     </div>
                 </div>
