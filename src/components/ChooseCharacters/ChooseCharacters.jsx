@@ -30,6 +30,10 @@ class ChooseCharacters extends Component {
         window.removeEventListener('scroll', this.testIsStartVisible);
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        this.testIsStartVisible();
+    }
+
     testIsStartVisible() {
         if(this.startRef) {
             const rect = this.startRef.getBoundingClientRect();
