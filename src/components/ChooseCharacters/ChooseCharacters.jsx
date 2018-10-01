@@ -10,7 +10,8 @@ class ChooseCharacters extends Component {
         this.state = {
             errMsg : '',
             selectedGroups: this.props.selectedGroups,
-            showAlternatives: []
+            showAlternatives: [],
+            showSimilars: []
         }
         this.toggleSelect = this.toggleSelect.bind(this);
         this.startGame = this.startGame.bind(this);
@@ -75,71 +76,80 @@ class ChooseCharacters extends Component {
         this.setState({selectedGroups: newSelectedGroups});
     }
 
-    toggleAlternative(whichKana) {
-        const idx = this.state.showAlternatives.indexOf(whichKana);
-        let newShowAlternatives = this.state.showAlternatives;
+    toggleAlternative(whichKana, postfix) {
+        let show = postfix == '_a' ? this.state.showAlternatives : this.state.showSimilars;
+        const idx = show.indexOf(whichKana);
         if(idx >= 0)
-            newShowAlternatives.splice(idx, 1);
+            show.splice(idx, 1);
         else
-            newShowAlternatives.push(whichKana)
-        this.setState({showAlternatives: newShowAlternatives});
+            show.push(whichKana)
+        if(postfix == '_a')
+            this.setState({showAlternatives: show});
+        if(postfix == '_s')
+            this.setState({showSimilars: show});
     }
 
-    getSelectedAlternatives(whichKana) {
+    getSelectedAlternatives(whichKana, postfix) {
         return this.state.selectedGroups.filter(groupName => {
             return groupName.startsWith(whichKana == 'hiragana' ? 'h_' : 'k_') &&
-                groupName.endsWith('_a');
+                groupName.endsWith(postfix);
         }).length;
     }
 
-    getAmountOfAlternatives(whichKana) {
+    getAmountOfAlternatives(whichKana, postfix) {
         return Object.keys(kanaDictionary[whichKana]).filter(groupName => {
-            return groupName.endsWith("_a");
+            return groupName.endsWith(postfix);
         }).length;
     }
 
-    alternativeToggleRow(whichKana, showAlternatives) {
+    alternativeToggleRow(whichKana, postfix, show) {
         let checkBtn = "glyphicon glyphicon-small glyphicon-"
         let status;
-        if(this.getSelectedAlternatives(whichKana) >= this.getAmountOfAlternatives(whichKana))
+        if(this.getSelectedAlternatives(whichKana, postfix) >= this.getAmountOfAlternatives(whichKana, postfix))
             status = 'check';
-        else if(this.getSelectedAlternatives(whichKana) > 0)
+        else if(this.getSelectedAlternatives(whichKana, postfix) > 0)
             status = 'check half';
         else
             status = 'unchecked'
         checkBtn += status
 
         return <div
-            key={'alt_toggle_' + whichKana}
-            onClick={() => this.toggleAlternative(whichKana)}
+            key={'alt_toggle_' + whichKana + postfix}
+            onClick={() => this.toggleAlternative(whichKana, postfix)}
             className="choose-row"
         >
             <span
                 className={checkBtn}
                 onClick={ e => {
                     if(status == 'check')
-                        this.selectNone(whichKana, true);
+                        this.selectNone(whichKana, postfix == '_a', postfix == '_s');
                     else if(status == 'check half' || status == 'unchecked')
-                        this.selectAll(whichKana, true);
+                        this.selectAll(whichKana, postfix == '_a', postfix == '_s');
                     e.stopPropagation();
                 }}
             ></span>
             {
-                showAlternatives ? <span className="toggle-caret">&#9650;</span>
+                show ? <span className="toggle-caret">&#9650;</span>
                 : <span className="toggle-caret">&#9660;</span>
             }
-            Alternative characters (ga · ba · kya..)
+            {
+                postfix == '_a' ? 'Alternative characters (ga · ba · kya..)' :
+                    'Look-a-like characters'
+            }
         </div>
     }
 
-    showGroupRows(whichKana, showAlternatives) {
+    showGroupRows(whichKana, showAlternatives, showSimilars = false) {
         const thisKana = kanaDictionary[whichKana];
         let rows = [];
         Object.keys(thisKana).forEach((groupName, idx) => {
-            if(groupName.endsWith("group11_a"))
-                rows.push(this.alternativeToggleRow(whichKana, showAlternatives));
+            if(groupName == "h_group11_a" || groupName == "k_group13_a")
+                rows.push(this.alternativeToggleRow(whichKana, "_a", showAlternatives));
+            if(groupName == "k_group11_s")
+                rows.push(this.alternativeToggleRow(whichKana, "_s", showSimilars));
 
-            if(!groupName.endsWith("a") || showAlternatives) {
+            if((!groupName.endsWith("a") || showAlternatives) &&
+               (!groupName.endsWith("s") || showSimilars)) {
                 rows.push(<CharacterGroup
                     key={idx}
                     groupName={groupName}
@@ -193,7 +203,7 @@ class ChooseCharacters extends Component {
                         <div className="panel panel-default">
                             <div className="panel-heading">Katakana · カタカナ</div>
                             <div className="panel-body selection-areas">
-                                {this.showGroupRows('katakana', this.state.showAlternatives.indexOf('katakana') >= 0)}
+                                {this.showGroupRows('katakana', this.state.showAlternatives.indexOf('katakana') >= 0, this.state.showSimilars.indexOf('katakana') >= 0)}
                             </div>
                             <div className="panel-footer text-center">
                                 <a href="javascript:;" onClick={()=>this.selectAll('katakana')}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;"
