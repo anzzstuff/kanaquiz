@@ -6,7 +6,7 @@
         margin-top: 0;
     }
 }
-.choose-characters 
+.choose-characters
 {
     .panel-heading {
         font-weight: bold;
@@ -111,4 +111,33 @@
 
 .switch.disabled {
     cursor: not-allowed;
+}
+
+.down-arrow {
+    user-select: none;
+    cursor: pointer;
+    border-radius: 4px 4px 0 0;
+	display: block;
+	position: fixed;
+    bottom: 20px;
+    right: 12px;
+    color: #fff;
+	background: #d9534f;
+	padding: 7px 0 2px;
+	width: 60px;
+	text-align: center;
+}
+
+.down-arrow:after {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 100%;
+	width: 0;
+	height: 0;
+	border-top: 10px solid #d9534f;
+	border-right: 30px solid transparent;
+	border-bottom: 0 solid transparent;
+	border-left: 30px solid transparent;
 }

@@ -11,10 +11,42 @@ class ChooseCharacters extends Component {
             errMsg : '',
             selectedGroups: this.props.selectedGroups,
             showAlternatives: [],
-            showSimilars: []
+            showSimilars: [],
+            startIsVisible: true
         }
         this.toggleSelect = this.toggleSelect.bind(this);
         this.startGame = this.startGame.bind(this);
+        this.testIsStartVisible = this.testIsStartVisible.bind(this);
+    }
+
+    componentDidMount() {
+        this.testIsStartVisible();
+        window.addEventListener('resize', this.testIsStartVisible);
+        window.addEventListener('scroll', this.testIsStartVisible);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.testIsStartVisible);
+        window.removeEventListener('scroll', this.testIsStartVisible);
+    }
+
+    testIsStartVisible() {
+        if(this.startRef) {
+            const rect = this.startRef.getBoundingClientRect();
+            if(rect.y > window.innerHeight && this.state.startIsVisible)
+                this.setState({ startIsVisible: false });
+            else if(rect.y <= window.innerHeight && !this.state.startIsVisible)
+                this.setState({ startIsVisible: true });
+        }
+    }
+
+    scrollToStart() {
+        if(this.startRef) {
+            const rect = this.startRef.getBoundingClientRect();
+            const absTop = rect.top + window.pageYOffset;
+            const scrollPos = absTop - window.innerHeight + 50;
+            window.scrollTo(0, scrollPos > 0 ? scrollPos : 0);
+        }
     }
 
     getIndex(groupName) {
@@ -230,7 +262,13 @@ class ChooseCharacters extends Component {
                             this.state.errMsg != '' &&
                                 <div className="error-message">{this.state.errMsg}</div>
                         }
-                        <button className="btn btn-danger startgame-button" onClick={this.startGame}>Start the Quiz!</button>
+                        <button ref={c => this.startRef = c} className="btn btn-danger startgame-button" onClick={this.startGame}>Start the Quiz!</button>
+                    </div>
+                    <div className="down-arrow"
+                        style={{display: this.state.startIsVisible ? 'none' : 'block'}}
+                        onClick={(e) => this.scrollToStart(e)}
+                    >
+                        Start
                     </div>
                 </div>
             </div>
