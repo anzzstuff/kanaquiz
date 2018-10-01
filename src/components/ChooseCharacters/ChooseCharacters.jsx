@@ -166,7 +166,7 @@ class ChooseCharacters extends Component {
             }
             {
                 postfix == '_a' ? 'Alternative characters (ga · ba · kya..)' :
-                    'Look-a-like characters'
+                    'Look-alike characters'
             }
         </div>
     }
