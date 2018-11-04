@@ -42,10 +42,11 @@ module.exports = {
         new SWPrecacheWebpackPlugin( {
             cacheId: 'kana-quiz',
             filename: 'sw.js',
+	    stripPrefix: '/home/anzz/Code/kanaquiz/',
             maximumFileSizeToCacheInBytes: 4194304,
             minify: true,
             runtimeCaching: [{
-                handler: 'cacheFirst',
+                handler: 'networkFirst',
                 urlPattern: /\.(woff2|svg|ttf|eot|woff|html)$/,
             }],
         })
