@@ -30,11 +30,11 @@
   transition: opacity 1s ease-in;
 }
 
-.stage-leave {
+.stage-exit {
   opacity: 1;
 }
 
-.stage-leave.stage-leave-active {
+.stage-exit.stage-exit-active {
   opacity: 0.01;
   transition: opacity 1s ease-in;
 }
