@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open --mode development --host 0.0.0.0 --config webpack.config.js",
     "mobile": "webpack-dev-server --open --mode development --host 0.0.0.0 --public 192.168.1.8:8080",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production --config webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,10 @@
     "url": "https://github.com/anzzstuff/kanaquiz/issues"
   },
   "homepage": "https://github.com/anzzstuff/kanaquiz#readme",
+  "browserslist": [
+    "> 0.25%",
+    "not dead"
+  ],
   "devDependencies": {
     "@babel/core": "^7.1.6",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
@@ -41,6 +45,7 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
