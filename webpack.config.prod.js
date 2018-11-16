@@ -1,75 +1,67 @@
-const webpack = require('webpack');
-const fs = require('fs');
-const path = require('path');
-const autoprefixer = require('autoprefixer');
-const precss = require('precss');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const path = require('path');
 
 module.exports = {
-    context: __dirname,
-    devtool: 'cheap-module-source-map',
-    entry: [
-        './src/index'
-    ],
-    output: {
-        path: path.resolve(__dirname, './dist'),
-        publicPath: './dist/',
-        filename: 'bundle.js'
-    },
-    resolve: {
-        extensions: ['.js', '.jsx']
-    },
-    plugins: [
-        new HtmlWebPackPlugin({
-            template: 'src/index.html',
-            filename: '../index.html'
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
-            compress:{
-                warnings: false
-            },
-        }),
-        new webpack.NoEmitOnErrorsPlugin(),
-        new webpack.LoaderOptionsPlugin({
+  context: __dirname,
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    publicPath: './dist/',
+    filename: 'bundle.js'
+  },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
+  plugins: [
+    new SWPrecacheWebpackPlugin( {
+      cacheId: 'kana-quiz',
+      filename: 'sw.js',
+      stripPrefix: '/home/anzz/code/kanaquiz/',
+      maximumFileSizeToCacheInBytes: 4194304,
+      minify: true,
+      runtimeCaching: [{
+        handler: 'networkFirst',
+        urlPattern: /\.(woff2|svg|ttf|eot|woff|html)$/,
+      }],
+    })
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
             options: {
-                postcss: function() {
-                    return [autoprefixer, precss];
-                }
+              importLoaders: 1
             }
-        }),
-        new SWPrecacheWebpackPlugin( {
-            cacheId: 'kana-quiz',
-            filename: 'sw.js',
-	    stripPrefix: '/home/anzz/Code/kanaquiz/',
-            maximumFileSizeToCacheInBytes: 4194304,
-            minify: true,
-            runtimeCaching: [{
-                handler: 'networkFirst',
-                urlPattern: /\.(woff2|svg|ttf|eot|woff|html)$/,
-            }],
-        })
-    ],
-    module: {
-        loaders: [
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                loaders: ['babel-loader']
-            }, {
-                test: /\.scss$/,
-                loaders: ['style-loader', 'css-loader', 'postcss-loader']
-            }, {
-                test: /\.css$/,
-                loaders: ['style-loader', 'css-loader']
-            }, {
-                test: /\.(png|jpg|svg|woff|woff2)?(\?v=\d+.\d+.\d+)?$/,
-                loader: 'url-loader?limit=8192'
-            }, {
-                test: /\.(eot|ttf)$/,
-                loader: 'file-loader'
-            }
+          },
+          {
+            loader: 'postcss-loader'
+          }
         ]
-    }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(png|jpg|svg|woff|woff2)?(\?v=\d+.\d+.\d+)?$/,
+        loader: 'url-loader?limit=25000'
+      }, 
+      {
+        test: /\.(eot|ttf)$/,
+        loader: 'file-loader'
+      }
+    ]
+  }
 };
