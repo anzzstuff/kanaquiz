@@ -1,11 +1,10 @@
 {
   "name": "kanaquiz",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Application for studying hiragana & katakana characters.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "s": "webpack --mode development --config webpack.config.js",
     "start": "webpack-dev-server --open --mode development --host 0.0.0.0 --config webpack.config.js",
     "mobile": "webpack-dev-server --open --mode development --host 0.0.0.0 --public 192.168.1.8:8080",
     "build": "webpack --mode production"
