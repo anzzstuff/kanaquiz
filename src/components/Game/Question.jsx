@@ -229,14 +229,16 @@ class Question extends Component {
         {this.getPreviousResult()}
         <div className="big-character">{this.getShowableQuestion()}</div>
         <div className="answer-container">
-          {this.props.stage<3?this.state.answerOptions.map(function(answer, idx) {
-            return <AnswerButton answer={answer}
-              className={btnClass}
-              key={idx}
-              answertype={this.getAnswerType()}
-              handleAnswer={this.handleAnswer} />
-          }, this):
-              <div className="answer-form-container">
+          {
+            this.props.stage<3 ?
+              this.state.answerOptions.map((answer, idx) => {
+                return <AnswerButton answer={answer}
+                  className={btnClass}
+                  key={idx}
+                  answertype={this.getAnswerType()}
+                  handleAnswer={this.handleAnswer} />
+              })
+            : <div className="answer-form-container">
                 <form onSubmit={this.handleSubmit}>
                   <input autoFocus className="answer-input" type="text" value={this.state.currentAnswer} onChange={this.handleAnswerChange} />
                 </form>
