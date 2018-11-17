@@ -1,4 +1,4 @@
-# Kana Quiz 2
+# Kana Quiz
 Kana Quiz made with React.js.
 
 See live at https://kana.pro/

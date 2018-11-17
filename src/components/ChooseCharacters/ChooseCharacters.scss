@@ -1,143 +1,143 @@
 .welcome {
-    p:last-child {
-        margin-bottom: 0;
-    }
-    h4 {
-        margin-top: 0;
-    }
+  p:last-child {
+    margin-bottom: 0;
+  }
+  h4 {
+    margin-top: 0;
+  }
 }
 .choose-characters
 {
-    .panel-heading {
-        font-weight: bold;
-    }
-    .panel-heading span {
-        color: #aaa;
-    }
-    .panel-footer a {
-        text-decoration: none;
-        color: #337ab7;
-    }
-    .choose-row {
-        font-size: 1em;
-        padding: 5px;
-    }
-    .choose-row:not(:last-child) {
-        border-bottom: 1px #eee solid;
-    }
-    .alt-row {
-        padding-left: 20px;
-        background-color: #fafafa;
-    }
-    .toggle-caret {
-        margin: 0 4px;
-    }
-    @media (min-width: 768px) {
-        .choose-row:hover {
-            background-color: #f4f4f4;
-        }
-    }
+  .panel-heading {
+    font-weight: bold;
+  }
+  .panel-heading span {
+    color: #aaa;
+  }
+  .panel-footer a {
+    text-decoration: none;
+    color: #337ab7;
+  }
+  .choose-row {
+    font-size: 1em;
+    padding: 5px;
+  }
+  .choose-row:not(:last-child) {
+    border-bottom: 1px #eee solid;
+  }
+  .alt-row {
+    padding-left: 20px;
+    background-color: #fafafa;
+  }
+  .toggle-caret {
+    margin: 0 4px;
+  }
+  @media (min-width: 768px) {
     .choose-row:hover {
-        cursor: pointer;
+      background-color: #f4f4f4;
     }
-    .glyphicon {
-        font-size: 0.9em;
-    }
-    .glyphicon-check {
-        color: green;
-    }
-    .glyphicon-check.half {
-        color: #ccc;
-    }
-    .glyphicon-unchecked {
-        color: #ccc;
-    }
-    .selection-areas {
-        padding: 7px;
-    }
-    .success-percent {
-        color: #ccc;
-    }
+  }
+  .choose-row:hover {
+    cursor: pointer;
+  }
+  .glyphicon {
+    font-size: 0.9em;
+  }
+  .glyphicon-check {
+    color: green;
+  }
+  .glyphicon-check.half {
+    color: #ccc;
+  }
+  .glyphicon-unchecked {
+    color: #ccc;
+  }
+  .selection-areas {
+    padding: 7px;
+  }
+  .success-percent {
+    color: #ccc;
+  }
 }
 .error-message {
-    color: #d9534f;
-    padding-bottom: 10px;
+  color: #d9534f;
+  padding-bottom: 10px;
 }
 .lock {
-    color: #888;
-    margin-bottom: 10px;
+  color: #888;
+  margin-bottom: 10px;
 }
 .stage-choice {
-    border: 1px solid #999;
-    padding-left: 5px;
-    border-radius: 5px;
-    margin-right: 5px;
-    outline: none;
+  border: 1px solid #999;
+  padding-left: 5px;
+  border-radius: 5px;
+  margin-right: 5px;
+  outline: none;
 }
 .switch {
-    border: 1px solid #ccc;
-    background: #e5e5e5;
-    width: 44px;
-    height: 19px;
-    border-radius: 13px;
-    cursor: pointer;
-    display: block;
-    float: right;
-    margin-top: 1px;
+  border: 1px solid #ccc;
+  background: #e5e5e5;
+  width: 44px;
+  height: 19px;
+  border-radius: 13px;
+  cursor: pointer;
+  display: block;
+  float: right;
+  margin-top: 1px;
 }
 
 .switch-toggle {
-    border: 1px solid #999;
-    box-shadow: 1px 1px 1px #ccc;
-    width: 19px;
-    height: 17px;
-    left: 0;
-    border-radius: 12px;
-    background: #eee;
-    position: relative;
-    transition: left .2s ease-in-out;
+  border: 1px solid #999;
+  box-shadow: 1px 1px 1px #ccc;
+  width: 19px;
+  height: 17px;
+  left: 0;
+  border-radius: 12px;
+  background: #eee;
+  position: relative;
+  transition: left .2s ease-in-out;
 }
 
 .switch.on {
-    border: 1px solid #4da94f;
-    background: #5cb85c;
+  border: 1px solid #4da94f;
+  background: #5cb85c;
 }
 
 .switch.on .switch-toggle {
-    left: 23px;
-    border: 1px solid #b8ffb2;
-    background: #b8ffb2;
+  left: 23px;
+  border: 1px solid #b8ffb2;
+  background: #b8ffb2;
 }
 
 .switch.disabled {
-    cursor: not-allowed;
+  cursor: not-allowed;
 }
 
 .down-arrow {
-    user-select: none;
-    cursor: pointer;
-    border-radius: 4px 4px 0 0;
-	display: block;
-	position: fixed;
-    bottom: 20px;
-    right: 12px;
-    color: #fff;
-	background: #d9534f;
-	padding: 7px 0 2px;
-	width: 60px;
-	text-align: center;
+  user-select: none;
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+  display: block;
+  position: fixed;
+  bottom: 20px;
+  right: 12px;
+  color: #fff;
+  background: #d9534f;
+  padding: 7px 0 2px;
+  width: 60px;
+  text-align: center;
 }
 
 .down-arrow:after {
-	content: '';
-	display: block;
-	position: absolute;
-	left: 0;
-	top: 100%;
-	width: 0;
-	height: 0;
-	border-top: 10px solid #d9534f;
-	border-right: 30px solid transparent;
-	border-bottom: 0 solid transparent;
-	border-left: 30px solid transparent;
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 0;
+  height: 0;
+  border-top: 10px solid #d9534f;
+  border-right: 30px solid transparent;
+  border-bottom: 0 solid transparent;
+  border-left: 30px solid transparent;
 }

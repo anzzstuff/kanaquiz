@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/anzzstuff/kanaquiz#readme",
   "browserslist": [
-    "> 0.25%",
+    ">0.25%",
     "not dead"
   ],
   "devDependencies": {

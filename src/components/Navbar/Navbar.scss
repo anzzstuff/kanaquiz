@@ -1,15 +1,15 @@
 #navbar ul li {
-    font-size: 1.2em;
-    @media (max-width: 768px) {
-      font-size: 1.0em;
-    }
-    .glyphicon {
-        font-size: 0.9em;
-        color: #d9534f;
-    }
+  font-size: 1.2em;
+  @media (max-width: 768px) {
+    font-size: 1.0em;
+  }
+  .glyphicon {
+    font-size: 0.9em;
+    color: #d9534f;
+  }
 }
 .navbar-inverse {
-    background-color: #333;
+  background-color: #333;
 }
 .hidden-nano {
   @media (max-width: 390px) {
@@ -88,7 +88,7 @@
   border-width: 0 1px 1px;
   border-radius: 0 0 4px 4px;
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-          box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }
 .navbar-default .navbar-nav .open .dropdown-menu > li > a {
   color: #333;
