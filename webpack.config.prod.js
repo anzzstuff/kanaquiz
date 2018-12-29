@@ -18,10 +18,16 @@ module.exports = {
       stripPrefix: '/home/anzz/code/kanaquiz/',
       maximumFileSizeToCacheInBytes: 4194304,
       minify: true,
-      runtimeCaching: [{
-        handler: 'networkFirst',
-        urlPattern: /\.(woff2|svg|ttf|eot|woff|html)$/,
-      }],
+      runtimeCaching: [
+        {
+          handler: 'fastest',
+          urlPattern: /\.(woff2|svg|ttf|eot|woff)$/,
+        },
+        {
+          handler: 'networkFirst',
+          urlPattern: /\.html$/
+        }
+      ],
     })
   ],
   module: {
