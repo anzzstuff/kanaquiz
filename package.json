@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --open --mode development --host 0.0.0.0 --config webpack.config.js",
-    "mobile": "webpack-dev-server --open --mode development --host 0.0.0.0 --public 192.168.1.8:8080",
-    "build": "webpack --mode production --config webpack.config.prod.js"
+    "start": "webpack-dev-server --open --env.mode development --host 0.0.0.0 --config webpack.config.js",
+    "mobile": "webpack-dev-server --open --env.mode development --host 0.0.0.0 --public 192.168.1.8:8080",
+    "build": "webpack --env.mode production --config webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
@@ -33,16 +33,17 @@
     "css-loader": "^1.0.1",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.12.0",
     "postcss": "^7.0.5",
     "postcss-loader": "^3.0.0",
     "precss": "^3.1.2",
     "react-hot-loader": "^4.3.12",
     "style-loader": "^0.23.1",
-    "sw-precache-webpack-plugin": "^0.11.5",
     "url-loader": "^1.1.2",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10"
+    "webpack-dev-server": "^3.9.0",
+    "workbox-webpack-plugin": "^4.3.1"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
@@ -50,6 +51,7 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-toggle-switch": "^3.0.4",
-    "react-transition-group": "^2.5.0"
+    "react-transition-group": "^2.5.0",
+    "workbox-window": "^4.3.1"
   }
 }
