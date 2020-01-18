@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './ShowStage.scss';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import {Scoreboard} from "./Scoreboard";
 
 class ShowStage extends Component {
   state = {
@@ -36,6 +37,7 @@ class ShowStage extends Component {
     else if(this.props.stage==5)
       return (
         <div className="text-center show-end">
+          <Scoreboard scoreboard={this.props.scoreboard}/>
           <h1>Congratulations!</h1>
           <h3>You have passed all 4 stages.</h3>
           <h4>Would you like to keep playing or go back to menu?</h4>

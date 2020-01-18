@@ -3,6 +3,7 @@ import { kanaDictionary } from '../../data/kanaDictionary';
 import { quizSettings } from '../../data/quizSettings';
 import { findRomajisAtKanaKey, removeFromArray, arrayContains, shuffle, cartesianProduct } from '../../data/helperFuncs';
 import './Question.scss';
+import {Scoreboard} from "./Scoreboard";
 
 class Question extends Component {
   state = {
@@ -113,10 +114,13 @@ class Question extends Component {
     this.previousAnswer = answer;
     this.setState({previousAnswer: this.previousAnswer});
     this.previousAllowedAnswers = this.allowedAnswers;
-    if(this.isInAllowedAnswers(this.previousAnswer))
-      this.stageProgress = this.stageProgress+1;
-    else
+    if(this.isInAllowedAnswers(this.previousAnswer)){
+      this.stageProgress = this.stageProgress + 1;
+      this.props.addAnswer("correct");
+    } else {
       this.stageProgress = this.stageProgress > 0 ? this.stageProgress - 1 : 0;
+      this.props.addAnswer("incorrect");
+    }
     this.setState({stageProgress: this.stageProgress});
     if(this.stageProgress >= quizSettings.stageLength[this.props.stage] && !this.props.isLocked) {
       setTimeout(() => { this.props.handleStageUp() }, 300);
@@ -226,6 +230,7 @@ class Question extends Component {
     let stageProgressPercentageStyle = { width: stageProgressPercentage }
     return (
       <div className="text-center question col-xs-12">
+        <Scoreboard scoreboard={this.props.scoreboard} stage={this.props.stage}/>
         {this.getPreviousResult()}
         <div className="big-character">{this.getShowableQuestion()}</div>
         <div className="answer-container">
