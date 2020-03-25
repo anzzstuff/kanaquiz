@@ -222,10 +222,10 @@ class ChooseCharacters extends Component {
                 {this.showGroupRows('hiragana', this.state.showAlternatives.indexOf('hiragana') >= 0)}
               </div>
               <div className="panel-footer text-center">
-                <a href="javascript:;" onClick={()=>this.selectAll('hiragana')}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;"
+                <a href="#" onClick={()=>this.selectAll('hiragana')}>All</a> &nbsp;&middot;&nbsp; <a href="#"
                   onClick={()=>this.selectNone('hiragana')}>None</a>
-                &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectAll('hiragana', true)}>All alternative</a>
-                &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNone('hiragana', true)}>No alternative</a>
+                &nbsp;&middot;&nbsp; <a href="#" onClick={()=>this.selectAll('hiragana', true)}>All alternative</a>
+                &nbsp;&middot;&nbsp; <a href="#" onClick={()=>this.selectNone('hiragana', true)}>No alternative</a>
               </div>
             </div>
           </div>
@@ -236,11 +236,11 @@ class ChooseCharacters extends Component {
                 {this.showGroupRows('katakana', this.state.showAlternatives.indexOf('katakana') >= 0, this.state.showSimilars.indexOf('katakana') >= 0)}
               </div>
               <div className="panel-footer text-center">
-                <a href="javascript:;" onClick={()=>this.selectAll('katakana')}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;"
+                <a href="#" onClick={()=>this.selectAll('katakana')}>All</a> &nbsp;&middot;&nbsp; <a href="#"
                   onClick={()=>this.selectNone('katakana')}>None
                 </a>
-                &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectAll('katakana', true)}>All alternative</a>
-                &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={()=>this.selectNone('katakana', true)}>No alternative</a>
+                &nbsp;&middot;&nbsp; <a href="#" onClick={()=>this.selectAll('katakana', true)}>All alternative</a>
+                &nbsp;&middot;&nbsp; <a href="#" onClick={()=>this.selectNone('katakana', true)}>No alternative</a>
               </div>
             </div>
           </div>
