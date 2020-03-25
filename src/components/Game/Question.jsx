@@ -240,7 +240,17 @@ class Question extends Component {
               })
             : <div className="answer-form-container">
                 <form onSubmit={this.handleSubmit}>
-                  <input autoFocus className="answer-input" type="text" value={this.state.currentAnswer} onChange={this.handleAnswerChange} />
+                  <input
+                    autoFocus
+                    className="answer-input"
+                    type="text"
+                    value={this.state.currentAnswer}
+                    onChange={this.handleAnswerChange}
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                  />
                 </form>
               </div>
           }
