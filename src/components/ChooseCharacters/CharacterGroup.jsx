@@ -36,8 +36,8 @@ class CharacterGroup extends Component {
         this.props.handleToggleSelect(this.props.groupName);
         this.changeShownChars(this.getShowableCharacters('romaji'));
       }}
-      onMouseDown={()=>this.changeShownChars(this.getShowableCharacters('kana'))}
-      onMouseOut={()=>this.changeShownChars(this.getShowableCharacters('romaji'))}
+      onMouseEnter={()=>this.changeShownChars(this.getShowableCharacters('kana'))}
+      onMouseLeave={()=>this.changeShownChars(this.getShowableCharacters('romaji'))}
       onTouchStart={()=>this.changeShownChars(this.getShowableCharacters('kana'))}
       onTouchEnd={()=>this.changeShownChars(this.getShowableCharacters('romaji'))}
     >
