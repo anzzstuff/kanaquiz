@@ -185,7 +185,7 @@ class Question extends Component {
           <div className="previous-result wrong" title="Wrong answer!">
             <span className="pull-left glyphicon glyphicon-none"></span>{rightAnswer}<span className="pull-right glyphicon glyphicon-remove"></span>
             <br />
-            (You answered: {this.previousAnswer})
+            <span className="previous-answer">(You answered: {this.previousAnswer})</span>
           </div>
         );
     }
