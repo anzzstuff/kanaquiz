@@ -1,3 +1,4 @@
+
 export const kanaDictionary = {
   'hiragana': {
     'h_group1': { characters: { 'あ': ['a'], 'い': ['i'], 'う': ['u'], 'え': ['e'], 'お': ['o'] } },
@@ -25,7 +26,12 @@ export const kanaDictionary = {
     'h_group23_a': { characters: { 'ぎゃ': ['gya'], 'ぎゅ': ['gyu'], 'ぎょ': ['gyo'] } },
     'h_group24_a': { characters: { 'じゃ': ['ja','jya'], 'じゅ': ['ju','jyu'], 'じょ': ['jo','jyo'] } },
     'h_group25_a': { characters: { 'びゃ': ['bya'], 'びゅ': ['byu'], 'びょ': ['byo'] } },
-    'h_group26_a': { characters: { 'ぴゃ': ['pya'], 'ぴゅ': ['pyu'], 'ぴょ': ['pyo'] } }
+    'h_group26_a': { characters: { 'ぴゃ': ['pya'], 'ぴゅ': ['pyu'], 'ぴょ': ['pyo'] } },
+    h_group27_s: { characters: { 'さ': ['sa'], 'ら': ['ra'], 'き': ['ki'], 'ち': ['chi','ti'] } },
+    h_group28_s: { characters: { 'な': ['na'], 'は': ['ha'], } },
+    h_group29_s: { characters: { 'わ': ['wa'], 'れ': ['re'], 'ね': ['ne'], } },
+    h_group30_s: { characters: { 'め': ['me'], 'の': ['no'], 'ぬ': ['nu'], } },
+    h_group31_s: { characters: { 'る': ['ru'], 'ろ': ['ro'] } },
   },
   'katakana': {
     'k_group1': { characters: { 'ア': ['a'], 'イ': ['i'], 'ウ': ['u'], 'エ': ['e'], 'オ': ['o'] } },
