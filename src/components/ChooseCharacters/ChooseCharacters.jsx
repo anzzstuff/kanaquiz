@@ -173,9 +173,9 @@ class ChooseCharacters extends Component {
     const thisKana = kanaDictionary[whichKana];
     let rows = [];
     Object.keys(thisKana).forEach((groupName, idx) => {
-      if(groupName == "h_group11_a" || groupName == "k_group13_a")
+      if(groupName === "h_group11_a" || groupName === "k_group13_a")
         rows.push(this.alternativeToggleRow(whichKana, "_a", showAlternatives));
-      if(groupName == "k_group11_s")
+      if(groupName === "k_group11_s" || groupName === 'h_group27_s')
         rows.push(this.alternativeToggleRow(whichKana, "_s", showSimilars));
 
       if((!groupName.endsWith("a") || showAlternatives) &&
@@ -219,7 +219,11 @@ class ChooseCharacters extends Component {
             <div className="panel panel-default">
               <div className="panel-heading">Hiragana · ひらがな</div>
               <div className="panel-body selection-areas">
-                {this.showGroupRows('hiragana', this.state.showAlternatives.indexOf('hiragana') >= 0)}
+                {this.showGroupRows(
+                    'hiragana',
+                    this.state.showAlternatives.indexOf('hiragana') >= 0,
+                    this.state.showSimilars.indexOf('hiragana') >= 0
+                )}
               </div>
               <div className="panel-footer text-center">
                 <a href="javascript:;" onClick={()=>this.selectAll('hiragana')}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;"
@@ -233,7 +237,11 @@ class ChooseCharacters extends Component {
             <div className="panel panel-default">
               <div className="panel-heading">Katakana · カタカナ</div>
               <div className="panel-body selection-areas">
-                {this.showGroupRows('katakana', this.state.showAlternatives.indexOf('katakana') >= 0, this.state.showSimilars.indexOf('katakana') >= 0)}
+                {this.showGroupRows(
+                    'katakana',
+                    this.state.showAlternatives.indexOf('katakana') >= 0,
+                    this.state.showSimilars.indexOf('katakana') >= 0
+                )}
               </div>
               <div className="panel-footer text-center">
                 <a href="javascript:;" onClick={()=>this.selectAll('katakana')}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;"
