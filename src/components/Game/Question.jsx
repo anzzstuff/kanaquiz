@@ -258,6 +258,22 @@ class Question extends Component {
           </div>
         </div>
       </div>
+      {
+      addEventListener('keydown', (event) => {
+        try {
+          switch (event.key) {
+            case '1':
+              document.getElementbyID('answer-button-1').click();
+              break;
+            case '2':
+              document.getElementbyID('answer-button-2').click();
+              break;
+            case '3':
+              document.getElementbyID('answer-button-3').click();
+              break;
+          }
+        } except {}
+      })}
     );
   }
 
@@ -271,13 +287,8 @@ class AnswerButton extends Component {
   }
 
   render() {
-    addEventListener('keydown', (event) => {
-      if (event.key == this.props.index + 1) {
-        this.props.handleAnswer(this.getShowableAnswer());
-      }
-    });
     return (
-      <button className={this.props.className} onClick={()=>this.props.handleAnswer(this.getShowableAnswer())}>{this.getShowableAnswer()}</button>
+      <button className={this.props.className} id={'answer-button-'+String(this.props.index+1)} onClick={()=>this.props.handleAnswer(this.getShowableAnswer())}>{this.getShowableAnswer()}</button>
     );
   }
 }
