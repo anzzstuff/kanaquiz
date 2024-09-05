@@ -107,6 +107,7 @@ class Question extends Component {
   }
 
   handleAnswer = answer => {
+    removeEventListener('keydown', this.shortcutListener);
     if(this.props.stage<=2) document.activeElement.blur(); // reset answer button's :active
     this.previousQuestion = this.currentQuestion;
     this.setState({previousQuestion: this.previousQuestion});
@@ -218,6 +219,22 @@ class Question extends Component {
     this.setNewQuestion();
   }
 
+  shortcutListener(event) {
+    try {
+      switch (event.key) {
+        case '1':
+          document.getElementById('answer-button-1').click();
+          break;
+        case '2':
+          document.getElementById('answer-button-2').click();
+          break;
+        case '3':
+          document.getElementById('answer-button-3').click();
+          break;
+      }
+    } catch {}
+  }
+
   render() {
     let btnClass = "btn btn-default answer-button";
     if ('ontouchstart' in window)
@@ -235,6 +252,7 @@ class Question extends Component {
                 return <AnswerButton answer={answer}
                   className={btnClass}
                   key={idx}
+                  index={idx}
                   answertype={this.getAnswerType()}
                   handleAnswer={this.handleAnswer} />
               })
@@ -256,6 +274,7 @@ class Question extends Component {
             <span>Stage {this.props.stage} {this.props.isLocked?' (Locked)':''}</span>
           </div>
         </div>
+        {addEventListener('keydown', this.shortcutListener)}
       </div>
     );
   }
@@ -271,7 +290,7 @@ class AnswerButton extends Component {
 
   render() {
     return (
-      <button className={this.props.className} onClick={()=>this.props.handleAnswer(this.getShowableAnswer())}>{this.getShowableAnswer()}</button>
+      <button className={this.props.className} id={'answer-button-'+String(this.props.index+1)} onClick={()=>this.props.handleAnswer(this.getShowableAnswer())}>{this.getShowableAnswer()}</button>
     );
   }
 }
