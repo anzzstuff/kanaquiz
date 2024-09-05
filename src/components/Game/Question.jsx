@@ -270,6 +270,11 @@ class AnswerButton extends Component {
   }
 
   render() {
+    addEventListener('keydown', (event) => {
+      if (event.key == this.key+1) {
+        ()=>this.props.handleAnswer(this.getShowableAnswer());
+      }
+    });
     return (
       <button className={this.props.className} onClick={()=>this.props.handleAnswer(this.getShowableAnswer())}>{this.getShowableAnswer()}</button>
     );
