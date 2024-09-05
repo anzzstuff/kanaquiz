@@ -235,6 +235,7 @@ class Question extends Component {
                 return <AnswerButton answer={answer}
                   className={btnClass}
                   key={idx}
+                  index={idx}
                   answertype={this.getAnswerType()}
                   handleAnswer={this.handleAnswer} />
               })
@@ -271,8 +272,8 @@ class AnswerButton extends Component {
 
   render() {
     addEventListener('keydown', (event) => {
-      if (event.key == this.props.key+1) {
-        ()=>this.props.handleAnswer(this.getShowableAnswer());
+      if (event.key == this.props.index + 1) {
+        this.props.handleAnswer(this.getShowableAnswer());
       }
     });
     return (
