@@ -107,6 +107,7 @@ class Question extends Component {
   }
 
   handleAnswer = answer => {
+    removeEventListener('keydown', this.shortcutListener);
     if(this.props.stage<=2) document.activeElement.blur(); // reset answer button's :active
     this.previousQuestion = this.currentQuestion;
     this.setState({previousQuestion: this.previousQuestion});
@@ -218,6 +219,22 @@ class Question extends Component {
     this.setNewQuestion();
   }
 
+  shortcutListener(event) {
+    try {
+      switch (event.key) {
+        case '1':
+          document.getElementById('answer-button-1').click();
+          break;
+        case '2':
+          document.getElementById('answer-button-2').click();
+          break;
+        case '3':
+          document.getElementById('answer-button-3').click();
+          break;
+      }
+    } catch {}
+  }
+
   render() {
     let btnClass = "btn btn-default answer-button";
     if ('ontouchstart' in window)
@@ -257,23 +274,8 @@ class Question extends Component {
             <span>Stage {this.props.stage} {this.props.isLocked?' (Locked)':''}</span>
           </div>
         </div>
+        {addEventListener('keydown', this.shortcutListener)}
       </div>
-      {
-      addEventListener('keydown', (event) => {
-        try {
-          switch (event.key) {
-            case '1':
-              document.getElementbyID('answer-button-1').click();
-              break;
-            case '2':
-              document.getElementbyID('answer-button-2').click();
-              break;
-            case '3':
-              document.getElementbyID('answer-button-3').click();
-              break;
-          }
-        } except {}
-      })}
     );
   }
 
